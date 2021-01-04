@@ -1,10 +1,10 @@
 +++
-title = "Part 4: Automating Chaos Engineering"
+title = "Part 4: New Models"
 chapter = true
 weight = 50
 +++
 
-# Part 4: Automating Chaos Engineering
+# Part 4: Automating Model Training
 ## What is Chaos Engineering Automation
 **Chaos Engineering Automation** is the practice of implementing Chaos Engineering Experiments in a **continuous** way to prevent **regression into past failures.**
 

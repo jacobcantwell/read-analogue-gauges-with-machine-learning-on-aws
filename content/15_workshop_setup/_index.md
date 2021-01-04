@@ -1,10 +1,10 @@
 +++
-title = "Workshop Setup"
+title = "Workshop setup"
 chapter = true
 weight = 10
 +++
 
-# Workshop Setup
+# Workshop setup
 
 
 
