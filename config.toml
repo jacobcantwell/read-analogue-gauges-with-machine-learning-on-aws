@@ -2,7 +2,7 @@ baseURL = "/"
 languageCode = "en-US"
 defaultContentLanguage = "en"
 
-title = "AWS Modernization Workshop Sample"
+title = "Read Analogue Gauges With Computer Vision"
 theme = "hugo-theme-learn"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= "true"
@@ -15,9 +15,9 @@ enableEmoji = true
   # See the config.toml file from this documentation site to have an example.
   #editURL = ""
   # Author of the site, will be used in meta information
-  author = "James Bland"
+  author = "Jacob Cantwell"
   # Description of the site, will be used in meta information
-  description = "AWS Modernization Workshop"
+  description = "Read Analogue Gauges With Computer Vision"
   # Shows a checkmark for visited pages on the menu
   showVisitedLinks = true
   # Disable search function. It will hide search bar
@@ -58,21 +58,6 @@ weight = 11
 name = "<i class='far fa-lightbulb'></i> Modernization with AWS"
 url = "https://aws.amazon.com/blogs/modernizing-with-aws/"
 weight = 20
-
-[[menu.shortcuts]]
-name = "<i class='fas fa-chalkboard-teacher'></i> EKS Workshop"
-url = "https://eksworkshop.com/"
-weight = 21
-
-[[menu.shortcuts]]
-name = "<i class='fas fa-chalkboard-teacher'></i> ECS Workshop"
-url = "https://ecsworkshop.com/"
-weight = 22
-
-[[menu.shortcuts]]
-name = "<i class='fas fa-chalkboard-teacher'></i> App Mesh Workshop"
-url = "https://www.appmeshworkshop.com/"
-weight = 23
 
 [markup]
   defaultMarkdownHandler = "blackfriday"
