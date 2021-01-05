@@ -20,3 +20,18 @@ On “day one,” you’ll start by setting up the infrastructure for the online
 Before “day two,” you’ll have the opportunity to run Chaos Engineering experiments on your environment to ensure that what you set up is working as expected. You’ll also learn how to get ahead of potential issues before the store opens again for “day two.”
 
 You have 2 hours to ramp up and take over the infrastructure team. It might sound hard but to quote the CEO of the company: " How hard can it be to keep a system up for 2 days?! I'm not a technical guy, but I don't know what's the big deal!"
+
+## Workshop summary
+
+* Virtual - Send mock AWS analogue telemetry to AWS IoT
+* Virtual - Build real time analogue guages Kibana
+* Virtual or Real - Take screen captures of the analog guages for training data
+* Deploy a sample model that can detect a Kibana guage on a Deeplens camera
+* Label the images with Amazon Sagemaker ground truth
+* Build a custom model with Sagemaker that can read the guage values
+* Invoke an endpoint client
+* View the real time dashboard with dial data
+
+## Project Ideation
+
+* Expand the flow to include other items or dial types
