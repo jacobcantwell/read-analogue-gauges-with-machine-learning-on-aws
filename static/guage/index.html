@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>Analogue Guage</title>
+<style>
+.gauge-temperature-f {
+    width:320px;
+    height:320px;
+    background:url(gauge-temperature-f-black.png);
+    float:left;
+    margin:25px;
+}
+.gauge-wind-dir {
+    width:250px;
+    height:250px;
+    background:url(guage-wind-dir.png);
+    float:left;
+    margin:25px;
+}
+</style>
+<script>
+var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
+	this.origin = origin;			// Zero units is this many degrees from up.
+	this.factor = factor;			// Degrees per unit.
+	this.zero = zeroValue;			// Dial reads this at zero degrees.
+	this.setPosition = setPosition;
+	this.redraw = redraw;
+	this.needle = new Image;	// The needle image.
+	this.needleCenter = [ 10, 102 ];
+	var c = document.getElementById(canvas);
+	this.ctx = c.getContext('2d');	// The drawing context.
+	this.canvasSize = [c.width, c.height];
+	this.needle.src = needleSrc;
+	function setPosition(position) {
+		// Convert to pointer degrees.
+		var degrees = Math.round((position-this.zero) * this.factor);
+		// Adjust to proper origin (typically lower left somewhere).
+		degrees = degrees + this.origin;
+		if (degrees < 0) degrees += 360;
+		if (degrees > 360) degrees -= 360;
+		this.redraw(degrees);
+	};
+	function redraw(degrees) {
+		var cx = this.ctx;
+		cx.save();
+		cx.clearRect( 0, 0, this.canvasSize[0], this.canvasSize[1] );
+		// Center the dial on the canvas.
+		cx.translate( this.canvasSize[0]/2 , this.canvasSize[1]/2 );
+		// Center the needle on the canvas.
+		cx.rotate( 0.0174532925 * degrees );
+		cx.drawImage( this.needle, -this.needleCenter[0], -this.needleCenter[1] );
+		cx.restore();
+	}
+};
+</script>
+</head>
+<body>
+<div class="gauge-temperature-f">
+    <canvas id="temperature-f" height="320" width="320"></canvas>
+</div>
+<div class="gauge-wind-dir">
+    <canvas id="wind-dir" height="250" width="250"></canvas>
+</div>
+<script>
+var tempGauge = new gauge(
+    "temperature-f",
+    "needle.png",
+    0,40,200/133);
+var dir = 1;
+let tempPosition = 0;
+const queryString = window.location.search;
+console.log(queryString);
+const urlParams = new URLSearchParams(queryString);
+tempPosition = urlParams.get('temp');
+setInterval(function(){ moveTempNeedle() }, 10);
+function moveTempNeedle() {
+    tempGauge.setPosition(tempPosition);
+}
+</script>
+<script>
+var windGauge = new gauge(
+    "wind-dir",
+    "needle-black.png",
+    0,0,1);
+windGauge.needleCenter = [8,105];
+var position = 0;
+var dir = 1;
+setInterval(function(){ moveWindNeedle() }, 15);
+function moveWindNeedle() {
+    if (dir === 1) {
+        if ((position += 0.5) > 359) dir = 0;
+    } else {
+        if ((position -= 0.5) < 1) dir = 1;
+    }
+    windGauge.setPosition(position);
+}
+</script>
+</body>
+</html>

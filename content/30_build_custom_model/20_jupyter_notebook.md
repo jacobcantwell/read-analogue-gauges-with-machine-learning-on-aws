@@ -100,3 +100,22 @@ Output training data path: s3://deeplens-analogue-guage-727949722849/training-ou
 ```
 
 Continue reading and working your way through the Jupyter Notebook with the instructions below.
+
+### Setup
+
+This section creates the AWS SDK objects for interacting with the AWS environment as well as read in the Execution Role. Click the **Run** button.
+
+![Run Setup](images/jupyter-run-notebook-4.png "Run Setup")
+
+Once executed you should see an output showing the Execution Role ARN.
+
+```txt
+Execution Role: arn:aws:iam::727949722849:role/service-role/AmazonSageMaker-ExecutionRole-20210105T143943
+```
+
+### Understanding the Augmented Manifest Format
+
+This notes sections gives a detailed description of the augmented manifest file that we use to describe the training data set and for data labelling. There is no code to execute in this section.
+
+### Download the Augmented Manifest and Training Images
+
