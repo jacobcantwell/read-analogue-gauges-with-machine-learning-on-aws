@@ -13,16 +13,20 @@
 	width: 4em;
 }
 .input-pressue {
+	border: 1px solid black;
+	float: left;
 	padding: 10px;
+	background: white;
 }
 .gauge-pressure {
-    width:800;
-    height:860;
+    width:600;
+    height:600;
     background:url(guage-pressure.jpg);
     background-repeat: no-repeat;
     margin: 0;
-    background-position-x: -100px;
-    background-position-y: -160px;
+    background-position-x: -195px;
+    background-position-y: -200px;
+    border: 0;
 }
 </style>
 <script>
@@ -76,7 +80,7 @@ var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
     <input type="number" id="bpInput" name="bpInput" min="10" max="230" onchange="updatePressure(this.value)" />
 </div>
 <div class="gauge-pressure">
-    <canvas id="pressure" height="680" width="796"></canvas>
+    <canvas id="pressure" height="485" width="604"></canvas>
 </div>
 <script>
 const queryString = window.location.search;
