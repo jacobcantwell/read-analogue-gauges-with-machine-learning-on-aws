@@ -133,3 +133,5 @@ static/.DS_Store
 .DS_Store
 src/lambda/functions/analogue-guage-screenshots/node_modules/*
 src/lambda/functions/analogue-guage-screenshots/output/*
+src/lambda/layers/chrome-aws-lambda/*
+src/lambda/layers/chrome-aws-lambda/
