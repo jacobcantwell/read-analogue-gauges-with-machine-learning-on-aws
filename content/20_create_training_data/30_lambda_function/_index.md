@@ -1,45 +1,51 @@
 +++
 title = "1.x Lambda Function"
 chapter = false
-weight = 25
-
+weight = 30
 +++
 
-[Helm](https://helm.sh/) describes itself as a 'package manager for kubernetes' and can be used to deploy resources to Kubernetes.
+## Create Function
 
-You package your application as a **chart** which can contain templated files (usually Kubernetes resources) and default configuration **values** too use when rendering the template. Charts are reusable and values can be overriden for specific environments.
+Open AWS Lambda **Functions** and select **Create function**.
 
-{{% notice tip %}}
-We are using Helm v3 in the workshops. So there is no `tiller`. If you are using your own environment and not the workshops **Cloud9** environment and you have Helm v2 the commands should work ok.
-{{% /notice %}}
+![Create function](30_lambda_function/images/create-lambda-function-1.png "Create function")
 
-At the terminal command prompt, enter the following command to download Helm:
+Select **Author from scratch**
 
-```bash
-curl -L https://get.helm.sh/helm-v3.1.2-linux-amd64.tar.gz -o helm.tar.gz
-```
+![Author from scratch](30_lambda_function/images/create-lambda-function-2.png "Author from scratch")
 
-We then want to extract helm, make it executable and copy to a location in the path:
+### Basic information
 
-```bash
-tar xvfz helm.tar.gz linux-amd64/helm
-chmod +x ./linux-amd64/helm
-sudo mv ./linux-amd64/helm /usr/local/bin
-```
+A runtime is a version of a programming language or framework that you can use to write Lambda functions. Lambda supports runtimes for the following languages:
 
-This will install `helm` in your **EKS Cluster**. To test to make sure the command is installed properly, execute the command:
+* JavaScript (Node.js)
+* Python
+* Ruby
+* Go
+* Java
+* C# (.NET Core)
+* PowerShell (.NET Core)
 
-```bash
-helm version
-```
+To use other languages in Lambda, you can create your own runtime.
 
-You should see the `helm` version message.
+An execution role gives your Lambda function permission to upload logs and access other AWS services. You will later add a policy to the execution role to give it access to downstream resources including the training S3 bucket.
 
-Before we leave we should tidy up by executing these commands:
+Enter basic information of the lambda function.
 
-```bash
-rm -rf ./linux-amd64
-rm helm.tar.gz
-```
+* Function name - Enter a descriptive name like *captureAnalogueGuageTraining*
+* Runtime  - The function will be written in node.js so select *Node.js 12.x*
+* Leave Permissions - leave as default *Create a new role with basic Lambda permissions*
 
+![Basic information](30_lambda_function/images/create-lambda-function-3.png "Basic information")
 
+### Advanced settings
+
+Leave Advanced settings as default. Select **Create fnction**.
+
+![Advanced settings](30_lambda_function/images/create-lambda-function-4.png "Advanced settings")
+
+After a short time you will be take to your lambda functions Configuration page. You should see a message saying that you have successfully created the function, you can now change its code and configuration, and can invoke your function with a test event.
+
+![Success message](30_lambda_function/images/create-lambda-function-5.png "Success message")
+
+In the next step, you will configure the function code of you Lambda function.

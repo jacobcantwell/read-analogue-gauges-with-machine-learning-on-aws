@@ -1,48 +1,27 @@
 +++
 title = "1.x Lambda Layer"
 chapter = false
-weight = 02
-
+weight = 20
 +++
 
+Open AWS Lambda **Layers**
 
+![Open Layers](20_lambda_layer/images/create-lambda-layer-1.png "Open Layers")
 
- In the case you need to grab the `kubeconfig` from AWS. You can do that by first looking for the name of the cluster using `eksctl`:
-```
-eksctl get clusters
-```
+Open **Create layer**
 
-And then grabbing the `kubeconfig` from AWS.
-```
- aws eks --region us-west-2  update-kubeconfig --name sockshop-eks-cluster
-```
+![Create layer](20_lambda_layer/images/create-lambda-layer-2.png "Create layer")
 
-You should now be able to view your cluster with `kubectl`
+* Enter Name - chrome-aws-lambda
+* Description - chrome-aws-lambda
+* Upload a .zip file - select the lambda layer *chrome_aws_lambda.zip* file
+* Select compatible runtimes - Select Node.js 12.x
+* Select **Create**
 
-```
-kubectl get nodes
-```
+![Create layer](20_lambda_layer/images/create-lambda-layer-3.png "Create layer")
 
-Now, you can deploy your sock shop
+You should see Lamba Layer was successfully created
 
-First clone the repo below and and go into the deploy/kubernetes folder.
+![Layer successfully created](20_lambda_layer/images/create-lambda-layer-4.png "Layer successfully created")
 
-```
-git clone https://github.com/microservices-demo/microservices-demo
-```
-Create the namespace
-
-```
-kubectl create namespace sock-shop
-```
-Deploy the application
-
-```
-kubectl apply -f complete-demo.yaml
-```
-🎉 Congrats, you've deployed the demo application on your cluster.
-
-
-
-
-
+Open **Lambda** to continue. In the next step we will create a Lambda Function that will generate the training data images.

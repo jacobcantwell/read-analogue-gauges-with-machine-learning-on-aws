@@ -1,9 +1,14 @@
-const chromium = require('chrome-aws-lambda');
+const chromium = require('chrome-aws-lambda')
+const AWS = require("aws-sdk");
+const s3 = new AWS.S3();
+const s3Bucket = process.env.S3_TRAINING_BUCKET
+
+const zeroPad = (num, places) => String(num).padStart(places, '0')
 
 exports.handler = async (event, context, callback) => {
-  let result = null;
-  let browser = null;
-  let results = [];
+  let result = null
+  let browser = null
+  let results = []
   try {
     browser = await chromium.puppeteer.launch({
       args: chromium.args,
@@ -11,15 +16,25 @@ exports.handler = async (event, context, callback) => {
       executablePath: await chromium.executablePath,
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
-    });
+    })
     let page = await browser.newPage();
-    for (i = 0; i < 231; i++) {
-        let bp = i;
+    for (let i = 0; i < 231; i++) {
+        let bp = zeroPad(i, 4);
         const url = 'https://aws-computer-vision.jacobcantwell.com/guage/?bp=' + bp;
-        const outputPath = './output/guage-bp-'+bp+'.jpg';
+        const s3Key = 'training-images/pressure-guage-bp-'+bp+'.jpg';
+        await page.setViewport({ width: 700, height: 780 });
         await page.goto(url);
-        await page.screenshot({ path: outputPath, type: 'jpeg', fullPage: true });
-        console.log('finished screenshot', url, outputPath);
+        const screenshot = await page.screenshot({
+            type: 'jpeg',
+            fullPage: true
+        });
+        const s3Params = {
+            Bucket: s3Bucket,
+            Key: s3Key,
+            Body: screenshot
+        };
+        await s3.putObject(s3Params).promise();
+        console.log('finished screenshot', s3Key);
         results.push(url);
     }
     result = {
