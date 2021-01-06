@@ -3,14 +3,29 @@
 <title>Analogue Guage</title>
 <style>
 .gauge-pressure {
-    width:800;
-    height:860;
+    width:400px;
+    height:400px;
     background:url(guage-pressure.jpg);
-    background-repeat: no-repeat;
-    margin: 0;
-    background-position-x: -100px;
-    background-position-y: -160px;
+    float:left;
+    margin:25px;
+    background-position-x: -109px;
+    background-position-y: -37px;
+    background-size: 600px 600px;
     border: 1px solid black;
+}
+.gauge-temperature-f {
+    width:320px;
+    height:320px;
+    background:url(gauge-temperature-f-black.png);
+    float:left;
+    margin:25px;
+}
+.gauge-wind-dir {
+    width:250px;
+    height:250px;
+    background:url(guage-wind-dir.png);
+    float:left;
+    margin:25px;
 }
 </style>
 <script>
@@ -21,7 +36,7 @@ var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 	this.setPosition = setPosition;
 	this.redraw = redraw;
 	this.needle = new Image;	// The needle image.
-	this.needleCenter = [ 0, 0 ];
+	this.needleCenter = [ 10, 102 ];
 	var c = document.getElementById(canvas);
 	this.ctx = c.getContext('2d');	// The drawing context.
 	this.canvasSize = [c.width, c.height];
@@ -50,41 +65,66 @@ var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 </script>
 </head>
 <body>
-<p>
-    Set pressure value:
-    <input type="number" id="bpInput" name="bpInput" min="0" max="230" onchange="updatePressure(this.value)" />
-</p>
 <div class="gauge-pressure">
-    <canvas id="pressure" height="680" width="796"></canvas>
+    <canvas id="pressure" height="400" width="400"></canvas>
+</div>
+<div class="gauge-temperature-f">
+    <canvas id="temperature-f" height="320" width="320"></canvas>
+</div>
+<div class="gauge-wind-dir">
+    <canvas id="wind-dir" height="250" width="250"></canvas>
 </div>
 <script>
+var tempGauge = new gauge(
+    "temperature-f",
+    "needle.png",
+    0,40,200/133);
+var dir = 1;
+let tempPosition = 0;
 const queryString = window.location.search;
+console.log(queryString);
 const urlParams = new URLSearchParams(queryString);
-const urlBp = urlParams.get('bp');
-console.log('queryString', queryString, urlParams, urlBp);
-
-let bp = 0;
-if (urlBp) {
-    bp = urlBp;
-    console.log('using URL bp', bp);
-    document.getElementById("bpInput").value = bp;
+tempPosition = urlParams.get('temp');
+console.log('tempPosition', tempPosition);
+setInterval(function(){ moveTempNeedle() }, 10);
+function moveTempNeedle() {
+    tempGauge.setPosition(tempPosition);
 }
-console.log('setting bp', bp);
-
-let pressureGauge = new gauge(
+</script>
+<script>
+var windGauge = new gauge(
+    "wind-dir",
+    "needle-black.png",
+    0,0,1);
+windGauge.needleCenter = [8,105];
+var position = 0;
+var dir = 1;
+setInterval(function(){ moveWindNeedle() }, 15);
+function moveWindNeedle() {
+    if (dir === 1) {
+        if ((position += 0.5) > 359) dir = 0;
+    } else {
+        if ((position -= 0.5) < 1) dir = 1;
+    }
+    windGauge.setPosition(position);
+}
+</script>
+<script>
+var pressureGauge = new gauge(
     "pressure",
     "needle-pressure.png",
-    0,115,230/200);
+    0,120,200/133);
 pressureGauge.needleCenter = [8,107];
 var dir = 1;
-let pressurePosition = bp;
+let pressurePosition = 0;
 setInterval(function(){ movePressureNeedle() }, 10);
 function movePressureNeedle() {
+    if (dir === 1) {
+        if ((pressurePosition += 0.5) > 359) dir = 0;
+    } else {
+        if ((pressurePosition -= 0.5) < 1) dir = 1;
+    }
     pressureGauge.setPosition(pressurePosition);
-}
-function updatePressure(newBp) {
-    console.log('newBp', newBp);
-    pressurePosition = newBp;
 }
 </script>
 </body>
