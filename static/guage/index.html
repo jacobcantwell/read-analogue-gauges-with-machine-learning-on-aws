@@ -74,8 +74,8 @@ console.log('setting bp', bp);
 let pressureGauge = new gauge(
     "pressure",
     "needle-pressure.png",
-    0,115,230/200);
-pressureGauge.needleCenter = [8,107];
+    0,120,230/210);
+pressureGauge.needleCenter = [26,200];
 var dir = 1;
 let pressurePosition = bp;
 setInterval(function(){ movePressureNeedle() }, 10);
