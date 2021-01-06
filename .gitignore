@@ -131,4 +131,5 @@ dmypy.json
 .DS_Store
 static/.DS_Store
 .DS_Store
-src/lambda/analogue-guage-screenshots/node_modules/*
+src/lambda/functions/analogue-guage-screenshots/node_modules/*
+src/lambda/functions/analogue-guage-screenshots/output/*

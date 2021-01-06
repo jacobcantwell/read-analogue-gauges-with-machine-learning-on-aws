@@ -1,7 +1,7 @@
 +++
-title = "Install helm"
+title = "1.x Lambda Function"
 chapter = false
-weight = 13
+weight = 25
 
 +++
 
@@ -27,7 +27,7 @@ chmod +x ./linux-amd64/helm
 sudo mv ./linux-amd64/helm /usr/local/bin
 ```
 
-This will install `helm` in your **Cloud9** environment. To test to make sure the command is installed properly, execute the command:
+This will install `helm` in your **EKS Cluster**. To test to make sure the command is installed properly, execute the command:
 
 ```bash
 helm version

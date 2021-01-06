@@ -1,5 +1,5 @@
 +++
-title = "1.2 Deploy the SockShop"
+title = "1.x Lambda Layer"
 chapter = false
 weight = 02
 

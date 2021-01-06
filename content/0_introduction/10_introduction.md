@@ -1,16 +1,16 @@
 +++
-title = "What is Chaos Engineering?"
+title = "Introduction"
 chapter = false
 weight = 10
 +++
-First, let's take a step back and start with it's definition. 
 
-#### Definition: 
+First, let's take a step back and start with it's definition.
+
+#### Definition
 
 {{% notice info %}}
 "Thoughtful, planned experiments designed to reveal weakness in our systems."
 {{% /notice %}}
-
 
 But we can break this down a bit more.
 
@@ -23,4 +23,4 @@ And that is exactly what we try to uncover when practicing Chaos Engineering: fi
 
 We do that by carefully experimenting on our systems to reveal weaknesses, learn from them, fix them and verify them in an ongoing fashion.
 
-If you are interested in learning more about the history of Chaos Engineering, [feel free to read this.](https://www.gremlin.com/community/tutorials/chaos-engineering-the-history-principles-and-practice/)  
+If you are interested in learning more about the history of Chaos Engineering, [feel free to read this.](https://www.gremlin.com/community/tutorials/chaos-engineering-the-history-principles-and-practice/)
