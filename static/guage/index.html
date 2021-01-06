@@ -28,7 +28,17 @@ var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 	this.needle.src = needleSrc;
 	function setPosition(position) {
 		// Convert to pointer degrees.
-		var degrees = Math.round((position-this.zero) * this.factor);
+		
+		const offsetCenter = position-this.zero;
+		if (offsetCenter > 0) {
+			this.factor = 1.21
+		} else if (offsetCenter > -40) {
+			this.factor = 1.13
+		} else {
+			this.factor = 1.17
+		}
+		let degrees = Math.round(offsetCenter * this.factor);
+		console.log('position|zero|factor|degrees', position, this.zero, offsetCenter, this.factor, degrees);
 		// Adjust to proper origin (typically lower left somewhere).
 		degrees = degrees + this.origin;
 		if (degrees < 0) degrees += 360;
@@ -52,7 +62,7 @@ var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 <body>
 <p>
     Set pressure value:
-    <input type="number" id="bpInput" name="bpInput" min="0" max="230" onchange="updatePressure(this.value)" />
+    <input type="number" id="bpInput" name="bpInput" min="10" max="230" onchange="updatePressure(this.value)" />
 </p>
 <div class="gauge-pressure">
     <canvas id="pressure" height="680" width="796"></canvas>
@@ -74,7 +84,7 @@ console.log('setting bp', bp);
 let pressureGauge = new gauge(
     "pressure",
     "needle-pressure.png",
-    0,120,230/210);
+    0,120,1.13);
 pressureGauge.needleCenter = [26,200];
 var dir = 1;
 let pressurePosition = bp;
