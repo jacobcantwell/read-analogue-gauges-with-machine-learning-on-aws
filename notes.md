@@ -31,4 +31,3 @@
 ## Dials
 
 * [jqxGauge](https://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgauge/index.htm)
-
