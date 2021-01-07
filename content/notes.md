@@ -1,10 +1,10 @@
-# Notes
+# Workshop notes
 
 ## AWS
 
 * [Belong AWS Deeplens Innovation Sprint](https://aws-deeplens-workshop.dcolcott.com/)
 
-## Machine Learning
+## Machine learning
 
 * [Analogue Gauge Reader using Computer Vision](https://medium.com/@nayak.abhijeet1/analogue-gauge-reader-using-computer-vision-62fbd6ec84cc)
 * [https://objectcomputing.com/resources/publications/sett/june-2019-using-machine-learning-to-read-analog-gauges](Machine Learning in Practice: Using Artificial Intelligence to Read Analog Gauges)
@@ -18,7 +18,7 @@
 * [GitHub Clock-Reader](https://github.com/shivaverma/Clock-Reader)
 * [Reading Clocks using Neural Nets](https://towardsdatascience.com/training-neural-net-to-read-clock-time-9473175171e3)
 
-## Lambda
+## Amazon Lambda
 
 * [Lambda layer - chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda)
 * [Google Chrome for AWS Lambda as a layer](https://github.com/shelfio/chrome-aws-lambda-layer)
@@ -28,6 +28,6 @@
 * [How to take screenshots using Puppeteer](https://www.scrapehero.com/how-to-take-screenshots-of-a-web-page-using-puppeteer/)
 * [PhantomJS - Scriptable Headless Browser](https://phantomjs.org/)
 
-## Dials
+## Analogue guages
 
 * [jqxGauge](https://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgauge/index.htm)
