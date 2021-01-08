@@ -1,5 +1,7 @@
 <html>
 <head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+<meta content="utf-8" http-equiv="encoding" />
 <title>Analogue Guage Builder</title>
 <style>
 .input-pressue {
@@ -10,13 +12,13 @@
 	border: 1px solid black;
 }
 .gauge-pressure {
-    width:800;
-    height:860;
-    background:url(images/guage-pressure.jpg);
-    background-repeat: no-repeat;
-    margin: 0;
-    background-position-x: -100px;
-    background-position-y: -160px;
+	width:800;
+	height:860;
+	background:url(images/guage-pressure.jpg);
+	background-repeat: no-repeat;
+	margin: 0;
+	background-position-x: -100px;
+	background-position-y: -160px;
 }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
@@ -90,19 +92,19 @@ p4.getSignatureKey = function(key, dateStamp, regionName, serviceName) {
 	const kService = CryptoJS.HmacSHA256(serviceName, kRegion);
 	const kSigning = CryptoJS.HmacSHA256('aws4_request', kService);
 	return kSigning;
-};
+}
 let mqttClient = {}
-let mqttIsConnected = false;
-function startConnect() {
+let mqttIsConnected = false
+function startConnect(){
 	console.log('startConnect')
-    const clientId = Math.random().toString(36).substring(7); 
-    mqttClient = new Paho.MQTT.Client(getEndpoint(), clientId);
-    // publish method added to simplify messaging 
-    mqttClient.publish = function(topic, payload) {
+	const clientId = Math.random().toString(36).substring(7); 
+	mqttClient = new Paho.MQTT.Client(getEndpoint(), clientId);
+	// publish method added to simplify messaging 
+	mqttClient.publish = function(topic, payload) {
 		let payloadText = JSON.stringify(payload);
-        let message = new Paho.MQTT.Message(payloadText);
-        message.destinationName = topic;
-        message.qos = 0;
+		let message = new Paho.MQTT.Message(payloadText);
+		message.destinationName = topic;
+		message.qos = 0;
 		mqttClient.send(message)
 		console.log('publish', topic, payload)
 	}
@@ -110,7 +112,7 @@ function startConnect() {
 		timeout: 3,
 		mqttVersion: 4,
 		onSuccess: onConnect
-    }
+  }
 	mqttClient.onConnectionLost = function(event) {
 		console.log('onConnectionLost', event)
 		updateConnectionStatus(false)
@@ -265,7 +267,7 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlBp = urlParams.get('bp');
-console.log('queryString', queryString, urlParams, urlBp);
+// console.log('queryString', queryString, urlParams, urlBp);
 let bp = 0;
 if (urlBp) {
     bp = urlBp;
