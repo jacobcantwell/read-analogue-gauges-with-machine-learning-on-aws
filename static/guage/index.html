@@ -202,10 +202,10 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 </script>
 </head>
 <body>
-<div class="bg-dark collapse" id="navbarHeader">
+<div class="bg-dark collapse" id="navbarExpandedHeader">
 	<div class="container">
 		<div class="row">
-			<button type="button" class="btn btn-primary navbar-toggler close" aria-label="Close" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false">
+			<button type="button" class="btn btn-primary navbar-toggler close" aria-label="Close" data-bs-toggle="collapse" data-bs-target="#navbarExpandedHeader" aria-controls="navbarExpandedHeader" aria-expanded="false">
 				Close
 			</button>
 		</div>
@@ -248,14 +248,14 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 		</div>
 	</div>
 </div>
-<div class="navbar navbar-dark bg-dark shadow-sm">
+<div id="navbarHeader" class="d-none navbar navbar-dark bg-dark shadow-sm">
 	<div class="container">
 		<a href="#" class="navbar-brand d-flex">
 			<strong>Analogue Guage Builder</strong>
 		</a>
 		<span id="mqttStatusBadgeConnected" class="badge bg-success d-none">AWS IoT Connected</span>
 		<span id="mqttStatusBadgeDisonnected" class="badge bg-danger d-none">AWS IoT Disconnected</span>
-		<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarExpandedHeader" aria-controls="navbarExpandedHeader" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 	</div>
@@ -267,7 +267,7 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlBp = urlParams.get('bp');
-// console.log('queryString', queryString, urlParams, urlBp);
+const urlView = urlParams.get('view');
 let bp = 0;
 if (urlBp) {
     bp = urlBp;
@@ -286,9 +286,16 @@ function updatePressure(newBp) {
 	pressureGauge.setPosition(newBp)
 	publishPressure(newBp)
 }
+function updateView(urlView) {
+	console.log('urlView', urlView)
+	const showNonGuageItems = (urlView !== 'training')
+	console.log('showNonGuageItems', showNonGuageItems)
+	$('#navbarHeader').removeClass('d-none').toggle(showNonGuageItems)
+}
 window.addEventListener('load', function () {
 	loadLocalStorage()
 	updatePressure(initialBp)
+	updateView(urlView)
 })
 </script>
 </body>
