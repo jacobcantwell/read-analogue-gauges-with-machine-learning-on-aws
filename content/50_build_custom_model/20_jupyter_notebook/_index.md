@@ -118,3 +118,9 @@ Execution Role: arn:aws:iam::727949722849:role/service-role/AmazonSageMaker-Exec
 This notes sections gives a detailed description of the augmented manifest file that we use to describe the training data set and for data labelling. There is no code to execute in this section.
 
 ### Download the Augmented Manifest and Training Images
+
+![Run Setup](20_jupyter_notebook/images/gauge-calibration.jpg "Run Setup")
+
+![Run Setup](20_jupyter_notebook/images/gauge-dst2.jpg "Run Setup")
+
+![Run Setup](20_jupyter_notebook/images/gauge-lines.jpg "Run Setup")

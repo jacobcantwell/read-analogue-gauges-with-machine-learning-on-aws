@@ -20,7 +20,7 @@ exports.handler = async (event, context, callback) => {
     let page = await browser.newPage();
     for (let i = 0; i < 231; i++) {
         let bp = zeroPad(i, 4);
-        const url = 'https://aws-computer-vision.jacobcantwell.com/guage/?bp=' + bp;
+        const url = 'https://aws-computer-vision.jacobcantwell.com/guage/?view=training&bp=' + bp;
         const s3Key = 'training-images/pressure-guage-bp-'+bp+'.jpg';
         await page.setViewport({ width: 700, height: 780 });
         await page.goto(url);

@@ -20,3 +20,4 @@ Input data connection successful.
 
 ![Open Layers](10_labeling_job/images/create-labeling-job-4.png "Open Layers")
 
+Walk through the next steps for a Ground Truth labelling.
