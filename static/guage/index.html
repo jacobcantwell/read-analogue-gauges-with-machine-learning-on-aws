@@ -2,32 +2,136 @@
 <head>
 <title>Pressure Guage</title>
 <style>
-.input-pressue, .input-pressue input {
-	font-size: 16px;
-	font-family: "Work Sans", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
-	font-weight: 300;
-	line-height: 1.6;
-}
-.input-pressue input {
-	margin-left: 1em;
-	width: 4em;
-}
 .input-pressue {
 	padding: 10px;
-	display: none;
+	display: block;
+	float: right;
+	width: 400px;
+	border: 1px solid black;
 }
 .gauge-pressure {
     width:800;
     height:860;
-    background:url(guage-pressure.jpg);
+    background:url(images/guage-pressure.jpg);
     background-repeat: no-repeat;
     margin: 0;
     background-position-x: -100px;
     background-position-y: -160px;
 }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core-min.js" type="text/javascript"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/hmac-min.js" type="text/javascript"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha256-min.js" type="text/javascript"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script> 
 <script>
-var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
+const MQTT_TOPIC_GUAGE_PRESSURE_PSI = 'guages/guage-alpha/pressure/psi'
+function loadLocalStorage() {
+	// aws region
+	const awsRegion = localStorage.getItem('awsRegion')
+	console.log('localStorage.awsRegion', awsRegion);
+	document.getElementById('awsRegion').value = awsRegion;
+	// aws custom endpoint
+	const awsCustomEndpoint = localStorage.getItem('awsCustomEndpoint')
+	console.log('localStorage.awsCustomEndpoint', awsCustomEndpoint);
+	document.getElementById('awsCustomEndpoint').value = awsCustomEndpoint;
+	// aws access key
+	const awsAccessKey = localStorage.getItem('awsAccessKey')
+	console.log('localStorage.awsAccessKey', awsAccessKey);
+	document.getElementById('awsAccessKey').value = awsAccessKey;
+	// aws secret access key
+	const awsSecretAccessKey = localStorage.getItem('awsSecretAccessKey')
+	console.log('localStorage.awsSecretAccessKey', awsSecretAccessKey);
+	document.getElementById('awsSecretAccessKey').value = awsSecretAccessKey;
+}
+function getEndpoint() { 
+	// example: us-east-1 
+	let awsRegion= document.getElementById('awsRegion');
+	localStorage.setItem('awsRegion', awsRegion.value);
+	// example: blahblahblah-ats.iot.your-region.amazonaws.com
+	let awsCustomEndpoint= document.getElementById('awsCustomEndpoint');
+	localStorage.setItem('awsCustomEndpoint', awsCustomEndpoint.value);
+	// your AWS access key ID
+	let awsAccessKey= document.getElementById('awsAccessKey');
+	localStorage.setItem('awsAccessKey', awsAccessKey.value);
+	// your AWS secret access key
+	let awsSecretAccessKey= document.getElementById('awsSecretAccessKey');
+	localStorage.setItem('awsSecretAccessKey', awsSecretAccessKey.value);
+	// date & time
+	const dt = (new Date()).toISOString().replace(/[^0-9]/g, "");
+	const ymd = dt.slice(0,8);
+	const fdt = `${ymd}T${dt.slice(8,14)}Z`
+	const scope = `${ymd}/${awsRegion}/iotdevicegateway/aws4_request`; 
+	const ks = encodeURIComponent(`${awsAccessKey}/${scope}`); 
+	let qs = `X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=${ks}&X-Amz-Date=${fdt}&X-Amz-SignedHeaders=host`; 
+	const req = `GET\n/mqtt\n${qs}\nhost:${awsCustomEndpoint}\n\nhost\n${p4.sha256('')}`; 
+	qs += '&X-Amz-Signature=' + p4.sign( 
+		p4.getSignatureKey( awsSecretAccessKey, ymd, awsRegion, 'iotdevicegateway'), 
+		`AWS4-HMAC-SHA256\n${fdt}\n${scope}\n${p4.sha256(req)}`
+	); 
+	return `wss://${awsCustomEndpoint}/mqtt?${qs}`; 
+}
+function p4() {} 
+p4.sign = function(key, msg) { 
+	const hash = CryptoJS.HmacSHA256(msg, key);
+	return hash.toString(CryptoJS.enc.Hex);
+};
+p4.sha256 = function(msg) { 
+	const hash = CryptoJS.SHA256(msg);
+	return hash.toString(CryptoJS.enc.Hex);
+};
+p4.getSignatureKey = function(key, dateStamp, regionName, serviceName) {
+	const kDate = CryptoJS.HmacSHA256(dateStamp, 'AWS4' + key);
+	const kRegion = CryptoJS.HmacSHA256(regionName, kDate);
+	const kService = CryptoJS.HmacSHA256(serviceName, kRegion);
+	const kSigning = CryptoJS.HmacSHA256('aws4_request', kService);
+	return kSigning;
+};
+let mqttClient = {}
+function startConnect() {
+	console.log('startConnect')
+    const clientId = Math.random().toString(36).substring(7); 
+    mqttClient = new Paho.MQTT.Client(getEndpoint(), clientId);
+    // publish method added to simplify messaging 
+    mqttClient.publish = function(topic, payload) {
+        let payloadText = JSON.stringify(payload);
+        let message = new Paho.MQTT.Message(payloadText);
+        message.destinationName = topic;
+        message.qos = 0;
+		mqttClient.send(message)
+		console.log('publish', topic, payload)
+	}
+	const connectOptions = {
+		timeout: 3,
+		mqttVersion: 4,
+		onSuccess: onConnect
+    }
+	mqttClient.onConnectionLost = function() {
+		console.log('onConnectionLost')
+	}
+	mqttClient.onMessageArrived = function(message) {
+		console.log('onMessageArrived', message.payloadString)
+	}
+	mqttClient.connect(connectOptions)
+	console.log('mqttClient.connect')
+	return false
+}
+function onConnect() {
+	console.log('mqtt connected')
+	const pressureTopic = MQTT_TOPIC_GUAGE_PRESSURE_PSI
+	mqttClient.subscribe(pressureTopic);
+	console.log('subscribe', pressureTopic)
+}
+function onFailure() {
+	console.log('mqtt connection failed')
+}
+function publishPressure(pressure) {
+	console.log('publishPressure', pressure)
+	mqttClient.publish(MQTT_TOPIC_GUAGE_PRESSURE_PSI, Number(pressure))
+}
+</script>
+<script>
+let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 	this.origin = origin;			// Zero units is this many degrees from up.
 	this.factor = factor;			// Degrees per unit.
 	this.zero = zeroValue;			// Dial reads this at zero degrees.
@@ -50,7 +154,7 @@ var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 			this.factor = 1.17
 		}
 		let degrees = Math.round(offsetCenter * this.factor);
-		console.log('position|zero|factor|degrees', position, this.zero, offsetCenter, this.factor, degrees);
+		// console.log('position|zero|factor|degrees', position, this.zero, offsetCenter, this.factor, degrees);
 		// Adjust to proper origin (typically lower left somewhere).
 		degrees = degrees + this.origin;
 		if (degrees < 0) degrees += 360;
@@ -68,13 +172,36 @@ var gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 		cx.drawImage( this.needle, -this.needleCenter[0], -this.needleCenter[1] );
 		cx.restore();
 	}
-};
+}
 </script>
 </head>
 <body>
 <div class="input-pressue">
-    Set pressure value:
-    <input type="number" id="bpInput" name="bpInput" min="10" max="230" onchange="updatePressure(this.value)" />
+	<form onsubmit="return stopForm()">
+		<div class="mb-3">
+			<label class="form-label" for="bpInput">Pressure value</label>
+			<input class="form-control" type="number" id="bpInput" name="bpInput" min="10" max="230" onchange="updatePressure(this.value)" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="awsRegion">AWS region</label>
+			<input class="form-control" type="text" id="awsRegion" name="awsRegion" value="us-east-1" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="awsCustomEndpoint">Custom endpoint</label>
+			<input class="form-control" type="text" id="awsCustomEndpoint" name="awsCustomEndpoint" value="" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="awsAccessKey">AWS access key ID</label>
+			<input class="form-control" type="text" id="awsAccessKey" name="awsAccessKey" value="" />
+		</div>
+		<div class="mb-3">
+			<label class="form-label" for="awsSecretAccessKey">AWS secret access key</label>
+			<input class="form-control" type="text" id="awsSecretAccessKey" name="awsSecretAccessKey" value="" />
+		</div>
+		<div class="mb-3">
+			<button type="button" class="btn btn-primary" onclick="startConnect()">Connect</button>
+		</div>
+	</form>
 </div>
 <div class="gauge-pressure">
     <canvas id="pressure" height="680" width="796"></canvas>
@@ -93,16 +220,18 @@ if (urlBp) {
 console.log('setting bp', bp);
 let pressureGauge = new gauge(
     "pressure",
-    "needle-pressure.png",
+    "images/needle-pressure.png",
     0,120,1.13);
 pressureGauge.needleCenter = [26,200];
 let initialBp = bp;
 function updatePressure(newBp) {
-    console.log('newBp', newBp);
-	pressureGauge.setPosition(newBp);
+    console.log('newBp', newBp)
+	pressureGauge.setPosition(newBp)
+	publishPressure(newBp)
 }
 window.addEventListener('load', function () {
-	updatePressure(initialBp);
+	loadLocalStorage()
+	updatePressure(initialBp)
 })
 </script>
 </body>

@@ -18,6 +18,12 @@
 * [GitHub Clock-Reader](https://github.com/shivaverma/Clock-Reader)
 * [Reading Clocks using Neural Nets](https://towardsdatascience.com/training-neural-net-to-read-clock-time-9473175171e3)
 
+## Computer Vision
+
+* [GitHub  intel-iot-devkit/python-cv-samples/analog-gauge-reader](https://github.com/intel-iot-devkit/python-cv-samples/tree/master/examples/analog-gauge-reader)
+* [Analog Gauge Reader](https://github.com/axn170037/Analogue-Gauge-Reader)
+* [How to read an analogue gauge using Open CV](https://stackoverflow.com/questions/44474947/how-to-read-an-analogue-gauge-using-open-cv)
+
 ## Amazon Lambda
 
 * [Lambda layer - chrome-aws-lambda](https://github.com/alixaxel/chrome-aws-lambda)
