@@ -25,8 +25,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/hmac-min.js" type="text/javascript"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha256-min.js" type="text/javascript"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script> 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" type="text/javascript"></script> 
 <script>
-const MQTT_TOPIC_GUAGE_PRESSURE_PSI = 'guages/guage-alpha/pressure/psi'
+const MQTT_TOPIC_GUAGE_STATUS_PRESSURE_PSI = 'guages/guage-alpha/status/pressure/psi'
+const MQTT_TOPIC_GUAGE_COMMAND_PRESSURE_PSI = 'guages/guage-alpha/set/pressure/psi'
+
 function loadLocalStorage() {
 	// aws region
 	const awsRegion = localStorage.getItem('awsRegion')
@@ -47,29 +50,29 @@ function loadLocalStorage() {
 }
 function getEndpoint() { 
 	// example: us-east-1 
-	let awsRegion= document.getElementById('awsRegion');
-	localStorage.setItem('awsRegion', awsRegion.value);
+	const awsRegion= document.getElementById('awsRegion').value;
+	localStorage.setItem('awsRegion', awsRegion);
 	// example: blahblahblah-ats.iot.your-region.amazonaws.com
-	let awsCustomEndpoint= document.getElementById('awsCustomEndpoint');
-	localStorage.setItem('awsCustomEndpoint', awsCustomEndpoint.value);
+	const awsCustomEndpoint= document.getElementById('awsCustomEndpoint').value;
+	localStorage.setItem('awsCustomEndpoint', awsCustomEndpoint);
 	// your AWS access key ID
-	let awsAccessKey= document.getElementById('awsAccessKey');
-	localStorage.setItem('awsAccessKey', awsAccessKey.value);
+	const awsAccessKey= document.getElementById('awsAccessKey').value;
+	localStorage.setItem('awsAccessKey', awsAccessKey);
 	// your AWS secret access key
-	let awsSecretAccessKey= document.getElementById('awsSecretAccessKey');
-	localStorage.setItem('awsSecretAccessKey', awsSecretAccessKey.value);
+	const awsSecretAccessKey= document.getElementById('awsSecretAccessKey').value;
+	localStorage.setItem('awsSecretAccessKey', awsSecretAccessKey);
 	// date & time
 	const dt = (new Date()).toISOString().replace(/[^0-9]/g, "");
 	const ymd = dt.slice(0,8);
 	const fdt = `${ymd}T${dt.slice(8,14)}Z`
-	const scope = `${ymd}/${awsRegion}/iotdevicegateway/aws4_request`; 
-	const ks = encodeURIComponent(`${awsAccessKey}/${scope}`); 
+	const scope = `${ymd}/${awsRegion}/iotdevicegateway/aws4_request`;
+	const ks = encodeURIComponent(`${awsAccessKey}/${scope}`);
 	let qs = `X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=${ks}&X-Amz-Date=${fdt}&X-Amz-SignedHeaders=host`; 
 	const req = `GET\n/mqtt\n${qs}\nhost:${awsCustomEndpoint}\n\nhost\n${p4.sha256('')}`; 
 	qs += '&X-Amz-Signature=' + p4.sign( 
 		p4.getSignatureKey( awsSecretAccessKey, ymd, awsRegion, 'iotdevicegateway'), 
 		`AWS4-HMAC-SHA256\n${fdt}\n${scope}\n${p4.sha256(req)}`
-	); 
+	);
 	return `wss://${awsCustomEndpoint}/mqtt?${qs}`; 
 }
 function p4() {} 
@@ -89,13 +92,14 @@ p4.getSignatureKey = function(key, dateStamp, regionName, serviceName) {
 	return kSigning;
 };
 let mqttClient = {}
+let mqttIsConnected = false;
 function startConnect() {
 	console.log('startConnect')
     const clientId = Math.random().toString(36).substring(7); 
     mqttClient = new Paho.MQTT.Client(getEndpoint(), clientId);
     // publish method added to simplify messaging 
     mqttClient.publish = function(topic, payload) {
-        let payloadText = JSON.stringify(payload);
+		let payloadText = JSON.stringify(payload);
         let message = new Paho.MQTT.Message(payloadText);
         message.destinationName = topic;
         message.qos = 0;
@@ -107,11 +111,19 @@ function startConnect() {
 		mqttVersion: 4,
 		onSuccess: onConnect
     }
-	mqttClient.onConnectionLost = function() {
-		console.log('onConnectionLost')
+	mqttClient.onConnectionLost = function(event) {
+		console.log('onConnectionLost', event)
+		updateConnectionStatus(false)
 	}
 	mqttClient.onMessageArrived = function(message) {
-		console.log('onMessageArrived', message.payloadString)
+		let messageTopic = message.destinationName
+		let messageValue = message.payloadString
+		console.log('onMessageArrived', messageTopic, messageValue)
+		if (messageTopic == MQTT_TOPIC_GUAGE_COMMAND_PRESSURE_PSI) {
+			updatePressure(messageValue)
+		} else {
+			console.error('unhandled message topic')
+		}
 	}
 	mqttClient.connect(connectOptions)
 	console.log('mqttClient.connect')
@@ -119,16 +131,27 @@ function startConnect() {
 }
 function onConnect() {
 	console.log('mqtt connected')
-	const pressureTopic = MQTT_TOPIC_GUAGE_PRESSURE_PSI
-	mqttClient.subscribe(pressureTopic);
+	updateConnectionStatus(true)
+	const pressureTopic = MQTT_TOPIC_GUAGE_COMMAND_PRESSURE_PSI
+	mqttClient.subscribe(pressureTopic)
 	console.log('subscribe', pressureTopic)
 }
 function onFailure() {
 	console.log('mqtt connection failed')
 }
 function publishPressure(pressure) {
-	console.log('publishPressure', pressure)
-	mqttClient.publish(MQTT_TOPIC_GUAGE_PRESSURE_PSI, Number(pressure))
+	console.log('publishPressure', pressure, mqttIsConnected)
+	if (!mqttIsConnected) {
+		console.info('publishing pressure before connection')
+		return
+	}
+	mqttClient.publish(MQTT_TOPIC_GUAGE_STATUS_PRESSURE_PSI, Number(pressure))
+}
+function updateConnectionStatus(isConnected) {
+	mqttIsConnected = isConnected
+	console.log('mqtt connection status', isConnected)
+	$('#mqttStatusBadgeConnected').removeClass('d-none').toggle(isConnected)
+	$('#mqttStatusBadgeDisconnected').removeClass('d-none').toggle(!isConnected)
 }
 </script>
 <script>
@@ -197,7 +220,8 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 		<div class="col">
 			<h4 class="text-white">AWS IoT</h4>
 			<p class="text-muted">Fill in the AWS IoT access details here.</p>
-			<form onsubmit="return stopForm()">
+			<p class="text-muted">To test subscribe to the 'guages/guage-alpha/pressure/psi' topic.</p>
+			<form id="mqttDetails" onsubmit="return stopForm()">
 				<div class="mb-3">
 					<label class="text-white form-label" for="awsRegion">AWS region</label>
 					<input class="form-control" type="text" id="awsRegion" name="awsRegion" value="us-east-1" />
@@ -224,9 +248,11 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 </div>
 <div class="navbar navbar-dark bg-dark shadow-sm">
 	<div class="container">
-		<a href="#" class="navbar-brand d-flex align-items-center">
+		<a href="#" class="navbar-brand d-flex">
 			<strong>Analogue Guage Builder</strong>
 		</a>
+		<span id="mqttStatusBadgeConnected" class="badge bg-success d-none">AWS IoT Connected</span>
+		<span id="mqttStatusBadgeDisonnected" class="badge bg-danger d-none">AWS IoT Disconnected</span>
 		<button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>

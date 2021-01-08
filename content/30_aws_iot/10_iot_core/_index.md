@@ -20,3 +20,17 @@ The endpoint has the suffix *.iot.us-east-1.amazonaws.com*
 Copy the Endpoint value to your local computer.
 
 ![Custom endpoint](10_labeling_job/images/aws-iot-endpoint.png "Custom endpoint")
+
+## Create an IAM user
+
+* Create an IAM user with the role *AWSIoTDataAccess*
+* Record the access key and secret access key
+
+## Test AWS IoT
+
+
+
+
+
+
+
