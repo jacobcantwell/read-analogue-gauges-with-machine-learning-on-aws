@@ -6,7 +6,9 @@ weight: 1
 
 ## Read Analogue Gauges With Computer Vision
 
-![image](/images/analogue-gauge.jpg)
+![Analogue guage](/images/pressure-gauge.jpg?width=20pc&classes=inline)
+![Analogue guage](/images/pressure-gauge-bw.jpg?width=20pc&classes=inline)
+![Analogue guage](/images/pressure-gauge-lines.jpg?width=20pc&classes=inline)
 
 [View a simulated pressure guage](guage/?bp=100)
 
