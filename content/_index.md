@@ -12,8 +12,6 @@ weight: 1
 
 [View a simulated pressure gauge](gauge/?bp=100)
 
-{{< badge type="primary" title="AWS" >}}
-
 ## Welcome
 
 
