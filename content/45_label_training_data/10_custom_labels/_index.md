@@ -6,11 +6,16 @@ weight = 10
 
 ## Creating your project
 
+In the first instance of setting up Amazon Rekognition will create
+
 1. In the AWS management console, search for *Amazon Rekognition*.
-2. On the Amazon Rekognition console, choose *Custom Labels*.
-3. Choose *Get Started*.
-4. For *Project name*, enter *GaugeDetection*.
-5. Choose *Create project*
+2. On the Amazon Rekognition console, choose **Use Custom Labels**.
+3. Choose **Get started**.
+4. If you see a *First time set up* message, choose **Create S3 bucket**. Record the S3 bucket name for future reference.
+5. For *Project name*, enter *GaugeDetection*.
+6. Choose **Create project**
+
+![Create project](10_custom_labels/images/create-custom-labels-1.png "Create project")
 
 You can also create a project on the Projects page. You can access the Projects page via the left navigation pane.
 
@@ -20,17 +25,18 @@ To create your analogue gauge detection model, you first need to create a datase
 
 To create your dataset:
 
-1. Choose *Create dataset*.
+1. Choose **Create dataset**.
 2. For *Dataset name*, enter *GaugeImages*.
 3. Select *Upload images from your computer*.
-4. Choose *Add Images*.
-5. Upload your images. You can always add more images later.
+4. Choose **Submit**.
+5. Choose **Add Images**.
+6. Upload your images 30 at a time. You can always add more images later.
 
 ## Labeling the images with bounding boxes
 
 You’re now ready to label the images by applying bounding boxes on all images with analogue gauges.
 
-Add *PressureGauge* as a label to your dataset via the labels list on the left side of the gallery.
+Add *PRESSURE_GUAGE* as a label to your dataset via the labels list on the left side of the gallery.
 
 Apply the label to the pressure gauges in the images by selecting all the images with a pressure gauge and choosing Draw Bounding Box.
 
@@ -46,10 +52,12 @@ After you label your images, you’re ready to train your model.
 
 As part of model training, Amazon Rekognition Custom Labels requires a labeled test dataset. Amazon Rekognition Custom Labels uses the test dataset to verify how well your trained model predicts the correct labels and generate evaluation metrics. Images in the test dataset are not used to train your model and should represent the same types of images you will use your model to analyze.
 
-1. Choose *Train Model*.
-2. For *Choose project*, choose your *GaugeDetection* project.
-3. For *Choose training dataset*, choose your *GaugeImages* dataset.
-4. For *Create test set*, choose *Split training dataset*. Amazon Rekognition will hold back 20% of the images for testing and use the remaining 80% of the images to train the model.
+1. Choose **Projects**.
+2. Choose your project **GaugeDetection**
+3. Choose *Train new model*.
+4. For *Choose project*, choose your *GaugeDetection* project.
+5. For *Choose training dataset*, choose your *GaugeImages* dataset.
+6. For *Create test set*, choose *Split training dataset*. Amazon Rekognition will hold back 20% of the images for testing and use the remaining 80% of the images to train the model.
 
 {{% notice info %}}
 Our model took approximately one hour to train. The training time required for your model depends on many factors, including the number of images provided in the dataset and the complexity of the model.
