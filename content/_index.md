@@ -6,11 +6,11 @@ weight: 1
 
 ## Read Analogue Gauges With Computer Vision
 
-![Analogue guage](/images/pressure-gauge.jpg?width=20pc&classes=inline)
-![Analogue guage](/images/pressure-gauge-bw.jpg?width=20pc&classes=inline)
-![Analogue guage](/images/pressure-gauge-lines.jpg?width=20pc&classes=inline)
+![Analogue gauge](/images/pressure-gauge.jpg?width=20pc&classes=inline)
+![Analogue gauge](/images/pressure-gauge-bw.jpg?width=20pc&classes=inline)
+![Analogue gauge](/images/pressure-gauge-lines.jpg?width=20pc&classes=inline)
 
-[View a simulated pressure guage](guage/?bp=100)
+[View a simulated pressure gauge](gauge/?bp=100)
 
 ## Welcome
 
@@ -21,11 +21,11 @@ In this workshop, you will get a hands-on introduction to Machine Learning.
 ## Workshop summary
 
 * Virtual - Send mock AWS analogue telemetry to AWS IoT
-* Virtual - Build real time analogue guages Kibana
-* Virtual or Real - Take screen captures of the analog guages for training data
-* Deploy a sample model that can detect a Kibana guage on a Deeplens camera
+* Virtual - Build real time analogue gauges Kibana
+* Virtual or Real - Take screen captures of the analog gauges for training data
+* Deploy a sample model that can detect a Kibana gauge on a Deeplens camera
 * Label the images with Amazon Sagemaker ground truth
-* Build a custom model with Sagemaker that can read the guage values
+* Build a custom model with Sagemaker that can read the gauge values
 * Invoke an endpoint client
 * View the real time dashboard with dial data
 

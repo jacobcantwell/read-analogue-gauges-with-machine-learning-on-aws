@@ -29,7 +29,7 @@ From your Amazon SageMaker console, select **Notebook instances** then **Create 
 
 #### Notebook instance settings
 
-Enter a name, such as *analogue-guage-detection*, for your notebook instance, leave everything else in this section as the default.
+Enter a name, such as *analogue-gauge-detection*, for your notebook instance, leave everything else in this section as the default.
 
 ![Notebook instance settings](10_sagemaker_notebook/images/sagemaker-create-notebook-2.png "Notebook instance settings")
 

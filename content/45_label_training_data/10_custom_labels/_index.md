@@ -1,5 +1,5 @@
 +++
-title = "1.x Custom labels"
+title = "x.1 Custom labels"
 chapter = false
 weight = 10
 +++
@@ -16,7 +16,7 @@ You can also create a project on the Projects page. You can access the Projects 
 
 ## Creating your dataset
 
-To create your analogue guage detection model, you first need to create a dataset to train the model with. For this workshop, our dataset is composed of images you have taken of the analogue guage.
+To create your analogue gauge detection model, you first need to create a dataset to train the model with. For this workshop, our dataset is composed of images you have taken of the analogue gauge.
 
 To create your dataset:
 
@@ -28,15 +28,15 @@ To create your dataset:
 
 ## Labeling the images with bounding boxes
 
-You’re now ready to label the images by applying bounding boxes on all images with analogue guages.
+You’re now ready to label the images by applying bounding boxes on all images with analogue gauges.
 
-Add *PressureGuage* as a label to your dataset via the labels list on the left side of the gallery.
+Add *PressureGauge* as a label to your dataset via the labels list on the left side of the gallery.
 
-Apply the label to the pressure guages in the images by selecting all the images with a pressure guage and choosing Draw Bounding Box.
+Apply the label to the pressure gauges in the images by selecting all the images with a pressure gauge and choosing Draw Bounding Box.
 
 You can use the Shift key to automatically select multiple images between the first and last selected images.
 
-Make sure to draw a bounding box that covers the pressure guage as tightly as possible.
+Make sure to draw a bounding box that covers the pressure gauge as tightly as possible.
 
 You will need to draw a bounding box on at least 30 images.
 
@@ -57,11 +57,11 @@ Our model took approximately one hour to train. The training time required for y
 
 When training is complete, Amazon Rekognition Custom Labels outputs key quality metrics including F1 score, precision, recall, and the assumed threshold for each label. For more information about metrics, see [Metrics for Evaluating Your Model](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/tr-metrics-use.html).
 
-You can also choose *View Test Results* to see how our model performed on each test image. The following screenshot shows an example of a correctly identified image of pressure guage during the model testing (true positive).
+You can also choose *View Test Results* to see how our model performed on each test image. The following screenshot shows an example of a correctly identified image of pressure gauge during the model testing (true positive).
 
 ## Testing your model
 
-Your custom guage detection model is now ready for use. Amazon Rekognition Custom Labels provides the API calls for starting, using and stopping your model; you don’t need to manage any infrastructure.
+Your custom gauge detection model is now ready for use. Amazon Rekognition Custom Labels provides the API calls for starting, using and stopping your model; you don’t need to manage any infrastructure.
 
 The following screenshot shows the API calls for using the model.
 

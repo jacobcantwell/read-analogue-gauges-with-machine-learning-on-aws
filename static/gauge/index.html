@@ -2,7 +2,7 @@
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
 <meta content="utf-8" http-equiv="encoding" />
-<title>Analogue Guage Builder</title>
+<title>Analogue Gauge Builder</title>
 <style>
 .input-pressue {
 	padding: 10px;
@@ -14,7 +14,7 @@
 .gauge-pressure {
 	width:800;
 	height:860;
-	background:url(resources/images/guage-pressure.jpg);
+	background:url(resources/images/gauge-pressure.jpg);
 	background-repeat: no-repeat;
 	margin: 0;
 	background-position-x: -100px;
@@ -36,8 +36,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script> 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" type="text/javascript"></script> 
 <script>
-const MQTT_TOPIC_GUAGE_STATUS_PRESSURE_PSI = 'guages/guage-alpha/status/pressure/psi'
-const MQTT_TOPIC_GUAGE_COMMAND_PRESSURE_PSI = 'guages/guage-alpha/set/pressure/psi'
+const MQTT_TOPIC_GAUGE_STATUS_PRESSURE_PSI = 'gauges/gauge-alpha/status/pressure/psi'
+const MQTT_TOPIC_GAUGE_COMMAND_PRESSURE_PSI = 'gauges/gauge-alpha/set/pressure/psi'
 
 function loadLocalStorage() {
 	// aws region
@@ -128,7 +128,7 @@ function startConnect(){
 		let messageTopic = message.destinationName
 		let messageValue = message.payloadString
 		console.log('onMessageArrived', messageTopic, messageValue)
-		if (messageTopic == MQTT_TOPIC_GUAGE_COMMAND_PRESSURE_PSI) {
+		if (messageTopic == MQTT_TOPIC_GAUGE_COMMAND_PRESSURE_PSI) {
 			updatePressure(messageValue)
 		} else {
 			console.error('unhandled message topic')
@@ -141,7 +141,7 @@ function startConnect(){
 function onConnect() {
 	console.log('mqtt connected')
 	updateConnectionStatus(true)
-	const pressureTopic = MQTT_TOPIC_GUAGE_COMMAND_PRESSURE_PSI
+	const pressureTopic = MQTT_TOPIC_GAUGE_COMMAND_PRESSURE_PSI
 	mqttClient.subscribe(pressureTopic)
 	console.log('subscribe', pressureTopic)
 }
@@ -154,7 +154,7 @@ function publishPressure(pressure) {
 		console.info('publishing pressure before connection')
 		return
 	}
-	mqttClient.publish(MQTT_TOPIC_GUAGE_STATUS_PRESSURE_PSI, Number(pressure))
+	mqttClient.publish(MQTT_TOPIC_GAUGE_STATUS_PRESSURE_PSI, Number(pressure))
 }
 function updateConnectionStatus(isConnected) {
 	mqttIsConnected = isConnected
@@ -218,8 +218,8 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 		</div>
 		<div class="row">
 		<div class="col">
-			<h4 class="text-white">Analogue Guage Builder</h4>
-			<p class="text-white">Add a pressure guage here.</p>
+			<h4 class="text-white">Analogue Gauge Builder</h4>
+			<p class="text-white">Add a pressure gauge here.</p>
 			<div class="mb-3">
 				<label class="text-white form-label" for="bpInput">Pressure value</label>
 				<input class="form-control" type="number" id="bpInput" name="bpInput" min="10" max="230" onchange="updatePressure(this.value)" />
@@ -229,7 +229,7 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 		<div class="col">
 			<h4 class="text-white">AWS IoT</h4>
 			<p class="text-muted">Fill in the AWS IoT access details here.</p>
-			<p class="text-muted">To test subscribe to the 'guages/guage-alpha/pressure/psi' topic.</p>
+			<p class="text-muted">To test subscribe to the 'gauges/gauge-alpha/pressure/psi' topic.</p>
 			<form id="mqttDetails" onsubmit="return stopForm()">
 				<div class="mb-3">
 					<label class="text-white form-label" for="awsRegion">AWS region</label>
@@ -258,7 +258,7 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 <div id="navbarHeader" class="d-none navbar navbar-dark bg-dark shadow-sm">
 	<div class="container">
 		<a href="#" class="navbar-brand d-flex">
-			<strong>Analogue Guage Builder</strong>
+			<strong>Analogue Gauge Builder</strong>
 		</a>
 		<span id="mqttStatusBadgeConnected" class="badge bg-success d-none">AWS IoT Connected</span>
 		<span id="mqttStatusBadgeDisonnected" class="badge bg-danger d-none">AWS IoT Disconnected</span>
@@ -295,9 +295,9 @@ function updatePressure(newBp) {
 }
 function updateView(urlView) {
 	console.log('urlView', urlView)
-	const showNonGuageItems = (urlView !== 'training')
-	console.log('showNonGuageItems', showNonGuageItems)
-	$('#navbarHeader').removeClass('d-none').toggle(showNonGuageItems)
+	const showNonGaugeItems = (urlView !== 'training')
+	console.log('showNonGaugeItems', showNonGaugeItems)
+	$('#navbarHeader').removeClass('d-none').toggle(showNonGaugeItems)
 }
 window.addEventListener('load', function () {
 	loadLocalStorage()

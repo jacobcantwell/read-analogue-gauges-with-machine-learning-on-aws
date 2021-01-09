@@ -12,13 +12,13 @@ In the managed Jupyter notebook console, you can upload Jupyter notebook applica
 
 A prebuilt Jupyter notebook file has been built for this lab.
 
-**Right-click** this [Jupyter-Analogue-Guage-Application](20_jupyter_notebook/jupyter/analogue-guage-augmented-manifest-training.ipynb) link and select **‘Save Link As’** to download the file to local directory.
+**Right-click** this [Jupyter-Analogue-Gauge-Application](20_jupyter_notebook/jupyter/analogue-gauge-augmented-manifest-training.ipynb) link and select **‘Save Link As’** to download the file to local directory.
 
-{{< button class="btn-primary" href="jupyter/analogue-guage-augmented-manifest-training.ipynb" >}}Download prebuilt Jupyter-Analogue-Guage-Application{{< /button >}}
+{{< button class="btn-primary" href="jupyter/analogue-gauge-augmented-manifest-training.ipynb" >}}Download prebuilt Jupyter-Analogue-Gauge-Application{{< /button >}}
 
 ### Upload the Jupyter notebook
 
-In the Jupyter notebook select **Upload** and select the ‘analogue-guage-augmented-manifest-training.ipynb’ file that you just saved locally.
+In the Jupyter notebook select **Upload** and select the ‘analogue-gauge-augmented-manifest-training.ipynb’ file that you just saved locally.
 
 ![Upload .pynb file](20_jupyter_notebook/images/jupyter-load-notebook-1.png "Upload .pynb file")
 
@@ -28,7 +28,7 @@ Then click the **Upload** button inline with the file you selected.
 
 Once the file is uploaded, click on the file name:
 
-![Select analogue-guage-augmented-manifest-training.ipynb](20_jupyter_notebook/images/jupyter-load-notebook-3.png "Select analogue-guage-augmented-manifest-training.ipynb")
+![Select analogue-gauge-augmented-manifest-training.ipynb](20_jupyter_notebook/images/jupyter-load-notebook-3.png "Select analogue-gauge-augmented-manifest-training.ipynb")
 
 This will take you to the Jupyter Notebook execution environment, you will get a page similar to the below:
 
@@ -61,10 +61,10 @@ The parameters that need updating are shown below. Click into the cell and modif
 
 ```python
 ## Updated below to your local lab team S3 bucket
-bucket_name = "deeplens-analogue-guage-[YOUR TEAM NAME]" # Replace '[YOUR TEAM NAME]' with your lab teams bucket name.
+bucket_name = "deeplens-analogue-gauge-[YOUR TEAM NAME]" # Replace '[YOUR TEAM NAME]' with your lab teams bucket name.
 
 # Create unique job name 
-job_name_prefix = 'analogue-guage-[YOUR TEAM NAME]' # Replace '[YOUR TEAM NAME]' with your lab team name.
+job_name_prefix = 'analogue-gauge-[YOUR TEAM NAME]' # Replace '[YOUR TEAM NAME]' with your lab team name.
 ```
 
 ### Execute a cell
@@ -92,11 +92,11 @@ After a few second the cell will complete and you should see the status cell ind
 The output of the code execution similar to below:
 
 ```txt
-Training Job Name: analogue-guage-727949722849-2021-01-05-09-58-24
-S3 Bucket: deeplens-analogue-guage-727949722849
-Augmented manifest for training data: s3://deeplens-analogue-guage-727949722849/manifests/train.manifest
-Augmented manifest for validation data: s3://deeplens-analogue-guage-727949722849/manifests/validate.manifest
-Output training data path: s3://deeplens-analogue-guage-727949722849/training-output
+Training Job Name: analogue-gauge-727949722849-2021-01-05-09-58-24
+S3 Bucket: deeplens-analogue-gauge-727949722849
+Augmented manifest for training data: s3://deeplens-analogue-gauge-727949722849/manifests/train.manifest
+Augmented manifest for validation data: s3://deeplens-analogue-gauge-727949722849/manifests/validate.manifest
+Output training data path: s3://deeplens-analogue-gauge-727949722849/training-output
 ```
 
 Continue reading and working your way through the Jupyter Notebook with the instructions below.

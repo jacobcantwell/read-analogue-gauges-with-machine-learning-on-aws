@@ -1,5 +1,5 @@
 +++
-title = "1.x Lambda Code"
+title = "1.x Lambda code"
 chapter = false
 weight = 40
 +++
@@ -58,8 +58,8 @@ exports.handler = async (event, context, callback) => {
     let page = await browser.newPage();
     for (let i = 0; i < 231; i++) {
         let bp = zeroPad(i, 4);
-        const url = 'https://aws-computer-vision.jacobcantwell.com/guage/?bp=' + bp;
-        const s3Key = 'training-images/pressure-guage-bp-'+bp+'.jpg';
+        const url = 'https://aws-computer-vision.jacobcantwell.com/gauge/?bp=' + bp;
+        const s3Key = 'training-images/pressure-gauge-bp-'+bp+'.jpg';
         await page.setViewport({ width: 700, height: 780 });
         await page.goto(url);
         const screenshot = await page.screenshot({
@@ -99,7 +99,7 @@ Select the **Deploy** button.
 * Select **Add environment variable**
 * Enter a Key/Value pair for the S3 training bucket
   * Key enter *S3_TRAINING_BUCKET*
-  * Value enter *deeplens-analogue-guage-727949722849*
+  * Value enter *deeplens-analogue-gauge-727949722849*
 * Select **Save**
 
 ![Environment variables](40_lambda_code/images/code-lambda-function-8.png "Environment variables")
@@ -112,10 +112,10 @@ The Memory (MB) setting determines the amount of memory available for your Lambd
 
 The default Timeout setting is 3 seconds. If tested now, the Lambda will throw an error message saying the task timed out after 3 seconds. Each screenshot takes up to 3 seconds to generate, we will create 230 images, so the timeout needs to be more than 690 seconds.
 
-* Edit the Description - Add a description of the function, *This function creates the training data for the Read Analogue Guages workshop.*
+* Edit the Description - Add a description of the function, *This function creates the training data for the Read Analogue Gauges workshop.*
 * Memory (MB) - Increase to 4096 MB
 * Timeout - Increase to 15 min
-* Execution role - Select the existing service role with the *service-role/captureAnalogueGuageTraining-role-* prefix
+* Execution role - Select the existing service role with the *service-role/captureAnalogueGaugeTraining-role-* prefix
 * Select **Save**
 
 ![Basic settings](40_lambda_code/images/code-lambda-function-9.png "Basic settings")
@@ -128,7 +128,7 @@ Change to the *Permissions* tab at the top of the Lambda function page.
 
 ### Execution role
 
-Select the role name with the *captureAnalogueGuageTraining-role-* prefix. This will launch the Identity and Access Management (IAM) service in a new tab.
+Select the role name with the *captureAnalogueGaugeTraining-role-* prefix. This will launch the Identity and Access Management (IAM) service in a new tab.
 
 ![Edit execution role](40_lambda_code/images/code-lambda-function-10.png "Edit execution role")
 
@@ -149,13 +149,13 @@ Return back to the lambda function tab in your web browser.
 
 ![Test](40_lambda_code/images/code-lambda-function-11.png "Test")
 
-* Enter an Event name *captureAnalogueGuages*
+* Enter an Event name *captureAnalogueGauges*
 * Leave the test event JSON at its default value
 * Select **Create**
 
 ![Test](40_lambda_code/images/code-lambda-function-12.png "Test")
 
-You should now see a new captureAnalogueGuages test event next to the **Test** button. Select **Test**.
+You should now see a new captureAnalogueGauges test event next to the **Test** button. Select **Test**.
 
 An Executing function... message will appear and the Lambda function should run for several minutes while it generates the training images.
 
@@ -166,7 +166,7 @@ An Executing function... message will appear and the Lambda function should run 
 You can see the progress of the training image generation by browsing to the S3 bucket.
 
 * Search for *S3* in the AWS Management Console search bar
-* Open the *deeplens-analogue-guage-727949722849* training bucket
+* Open the *deeplens-analogue-gauge-727949722849* training bucket
 * Open the *training-images* folder
 
 Select the *Refresh* button to see more Objects as they are created. When the Lambda function is complete 231 training images will be created.
@@ -180,8 +180,8 @@ Select the *Refresh* button to see more Objects as they are created. When the La
 
 The image will download to your local computer for you to preview.
 
-![Pressure guage image](40_lambda_code/images/pressure-guage-bp-0010.jpg# thumbnail "Pressure guage image 0010")
+![Pressure gauge image](40_lambda_code/images/pressure-gauge-bp-0010.jpg# thumbnail "Pressure gauge image 0010")
 
-![Pressure guage image](40_lambda_code/images/pressure-guage-bp-0120.jpg# thumbnail "Pressure guage image 0120")
+![Pressure gauge image](40_lambda_code/images/pressure-gauge-bp-0120.jpg# thumbnail "Pressure gauge image 0120")
 
-![Pressure guage image](40_lambda_code/images/pressure-guage-bp-0230.jpg# thumbnail "Pressure guage image 0230")
+![Pressure gauge image](40_lambda_code/images/pressure-gauge-bp-0230.jpg# thumbnail "Pressure gauge image 0230")

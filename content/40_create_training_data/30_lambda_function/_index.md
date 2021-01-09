@@ -1,10 +1,10 @@
 +++
-title = "1.x Lambda Function"
+title = "1.x Lambda function"
 chapter = false
 weight = 30
 +++
 
-## Create Function
+## Create function
 
 Open AWS Lambda **Functions** and select **Create function**.
 
@@ -32,7 +32,7 @@ An execution role gives your Lambda function permission to upload logs and acces
 
 Enter basic information of the lambda function.
 
-* Function name - Enter a descriptive name like *captureAnalogueGuageTraining*
+* Function name - Enter a descriptive name like *captureAnalogueGaugeTraining*
 * Runtime  - The function will be written in node.js so select *Node.js 12.x*
 * Leave Permissions - leave as default *Create a new role with basic Lambda permissions*
 

@@ -18,7 +18,7 @@
 
 * [Analogue Gauge Reader using Computer Vision](https://medium.com/@nayak.abhijeet1/analogue-gauge-reader-using-computer-vision-62fbd6ec84cc)
 * [https://objectcomputing.com/resources/publications/sett/june-2019-using-machine-learning-to-read-analog-gauges](Machine Learning in Practice: Using Artificial Intelligence to Read Analog Gauges)
-* [Twitter reading guages](https://twitter.com/svpino/status/1288849923409154048)
+* [Twitter reading gauges](https://twitter.com/svpino/status/1288849923409154048)
 * [Analog Gauge model v1.01](https://gauge.vinsa.ai/)
 * [Vinsa AI Solutions](https://www.vinsa.ai/)
 * [GitHub  aws/amazon-sagemaker-examples](https://github.com/aws/amazon-sagemaker-examples)
@@ -45,6 +45,6 @@
 * [How to take screenshots using Puppeteer](https://www.scrapehero.com/how-to-take-screenshots-of-a-web-page-using-puppeteer/)
 * [PhantomJS - Scriptable Headless Browser](https://phantomjs.org/)
 
-## Analogue guages
+## Analogue gauges
 
 * [jqxGauge](https://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgauge/index.htm)

@@ -131,9 +131,9 @@ dmypy.json
 .DS_Store
 static/.DS_Store
 .DS_Store
-src/lambda/functions/analogue-guage-screenshots/node_modules/*
-src/lambda/functions/analogue-guage-screenshots/output/*
+src/lambda/functions/analogue-gauge-screenshots/node_modules/*
+src/lambda/functions/analogue-gauge-screenshots/output/*
 src/lambda/layers/chrome-aws-lambda/*
 src/lambda/layers/chrome-aws-lambda/
-content/30_build_custom_model/jupyter/analogue-guage-detection/training-images/*
-content/50_build_custom_model/20_jupyter_notebook/jupyter/analogue-guage-detection/training-images/*
+content/30_build_custom_model/jupyter/analogue-gauge-detection/training-images/*
+content/50_build_custom_model/20_jupyter_notebook/jupyter/analogue-gauge-detection/training-images/*
