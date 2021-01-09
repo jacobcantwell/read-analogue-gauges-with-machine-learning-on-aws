@@ -3,6 +3,16 @@
 ## AWS
 
 * [Belong AWS Deeplens Innovation Sprint](https://aws-deeplens-workshop.dcolcott.com/)
+* [Training a custom single class object detection model with Amazon Rekognition Custom Labels](https://aws.amazon.com/blogs/machine-learning/training-a-custom-single-class-object-detection-model-with-amazon-rekognition-custom-labels/)
+* [Machine Learning at the Edge: Using and Retraining Image Classification Models with AWS IoT Greengrass (Part 1)](https://aws.amazon.com/blogs/iot/machine-learning-at-the-edge-using-and-retraining-image-classification-models-with-aws-iot-greengrass-part-1/)
+* [Training the Amazon SageMaker object detection model and running it on AWS IoT Greengrass – Part 1 of 3: Preparing training data](https://aws.amazon.com/blogs/iot/sagemaker-object-detection-greengrass-part-1-of-3/)
+* [Training the Amazon SageMaker object detection model and running it on AWS IoT Greengrass – Part 2 of 3: Training a custom object detection model](https://aws.amazon.com/blogs/iot/sagemaker-object-detection-greengrass-part-2-of-3/)
+* [Training the Amazon SageMaker object detection model and running it on AWS IoT Greengrass – Part 3 of 3: Deploying to the edge](https://aws.amazon.com/blogs/iot/sagemaker-object-detection-greengrass-part-3-of-3/)
+
+## AWS Jupyter Notebooks
+
+* [IoT Greengrass image classification model training and retraining](https://github.com/aws-samples/aws-greengrass-samples/blob/master/iot-blog/image-classification-connector-and-feedback/notebook/greengrass-image-classification-blog.ipynb)
+* [Prepare the ground truth object detection labeling output for training](https://github.com/aws-samples/amazon-sagemaker-aws-greengrass-custom-object-detection-model/blob/master/training/01_Process%20SageMaker%20Ground%20Truth%20labeling%20job%20outputs%20for%20training.ipynb)
 
 ## Machine learning
 
