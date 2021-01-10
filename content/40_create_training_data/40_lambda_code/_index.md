@@ -99,7 +99,7 @@ Select the **Deploy** button.
 * Select **Add environment variable**
 * Enter a Key/Value pair for the S3 training bucket
   * Key enter *S3_TRAINING_BUCKET*
-  * Value enter *deeplens-analogue-gauge-727949722849*
+  * Value enter *analogue-gauge-images-158287123688*
 * Select **Save**
 
 ![Environment variables](40_lambda_code/images/code-lambda-function-8.png "Environment variables")
@@ -115,7 +115,7 @@ The default Timeout setting is 3 seconds. If tested now, the Lambda will throw a
 * Edit the Description - Add a description of the function, *This function creates the training data for the Read Analogue Gauges workshop.*
 * Memory (MB) - Increase to 4096 MB
 * Timeout - Increase to 15 min
-* Execution role - Select the existing service role with the *service-role/captureAnalogueGaugeTraining-role-* prefix
+* Execution role - Select the existing service role with the *service-role/captureAnalogueGaugeBuilder-role-* prefix
 * Select **Save**
 
 ![Basic settings](40_lambda_code/images/code-lambda-function-9.png "Basic settings")
@@ -128,7 +128,7 @@ Change to the *Permissions* tab at the top of the Lambda function page.
 
 ### Execution role
 
-Select the role name with the *captureAnalogueGaugeTraining-role-* prefix. This will launch the Identity and Access Management (IAM) service in a new tab.
+Select the role name with the *captureAnalogueGaugeBuilder-role-* prefix. This will launch the Identity and Access Management (IAM) service in a new tab.
 
 ![Edit execution role](40_lambda_code/images/code-lambda-function-10.png "Edit execution role")
 
@@ -149,7 +149,7 @@ Return back to the lambda function tab in your web browser.
 
 ![Test](40_lambda_code/images/code-lambda-function-11.png "Test")
 
-* Enter an Event name *captureAnalogueGauges*
+* Enter an Event name *captureGaugeBuilder*
 * Leave the test event JSON at its default value
 * Select **Create**
 
@@ -166,7 +166,7 @@ An Executing function... message will appear and the Lambda function should run 
 You can see the progress of the training image generation by browsing to the S3 bucket.
 
 * Search for *S3* in the AWS Management Console search bar
-* Open the *deeplens-analogue-gauge-727949722849* training bucket
+* Open the *analogue-gauge-images-* prefixed training bucket
 * Open the *training-images* folder
 
 Select the *Refresh* button to see more Objects as they are created. When the Lambda function is complete 231 training images will be created.

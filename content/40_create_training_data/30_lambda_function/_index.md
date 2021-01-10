@@ -32,7 +32,7 @@ An execution role gives your Lambda function permission to upload logs and acces
 
 Enter basic information of the lambda function.
 
-* Function name - Enter a descriptive name like *captureAnalogueGaugeTraining*
+* Function name - Enter a descriptive name like *captureAnalogueGaugeBuilderImages*
 * Runtime  - The function will be written in node.js so select *Node.js 12.x*
 * Leave Permissions - leave as default *Create a new role with basic Lambda permissions*
 

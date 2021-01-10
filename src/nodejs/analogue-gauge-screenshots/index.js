@@ -51,7 +51,7 @@ exports.handler = async (event, context, callback) => {
       ignoreHTTPSErrors: true,
     })
     let page = await browser.newPage();
-    for (let i = 0; i < 231; i++) {
+    for (let i = 0; i < 1; i++) {
         let bp = zeroPad(i, 3);
         const url = URL_GAUGE_BUILDER_PREFIX + bp;
         console.log('loading url', url);
@@ -92,7 +92,7 @@ exports.handler = async (event, context, callback) => {
       await browser.close();
     }
   }
-  return callback(null, result);
+  // return callback(null, result);
 };
 
-// exports.handler();
+exports.handler();

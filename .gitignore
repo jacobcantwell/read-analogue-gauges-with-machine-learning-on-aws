@@ -137,3 +137,4 @@ src/lambda/layers/chrome-aws-lambda/*
 src/lambda/layers/chrome-aws-lambda/
 content/30_build_custom_model/jupyter/analogue-gauge-detection/training-images/*
 content/50_build_custom_model/20_jupyter_notebook/jupyter/analogue-gauge-detection/training-images/*
+src/nodejs/analogue-gauge-screenshots/node_modules/*

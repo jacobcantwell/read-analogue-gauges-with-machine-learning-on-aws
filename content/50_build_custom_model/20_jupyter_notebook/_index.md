@@ -1,5 +1,5 @@
 +++
-title = "x.2 Jupyter Notebooks"
+title = "x.2 Jupyter notebo"
 chapter = true
 weight =  20
 +++
