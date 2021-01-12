@@ -24,7 +24,6 @@
 	border: 2px solid black;
 	float: left;
 	margin: 10;
-	background-image: linear-gradient(to right, rgb(60, 68, 72, 0.2), rgba(20,20,20,0.1));
 	overflow: hidden;
 }
 .gauge-pressure {
@@ -51,7 +50,7 @@
 <script>
 const MQTT_TOPIC_GAUGE_STATUS_PRESSURE_PSI = 'gauges/gauge-alpha/status/pressure/psi'
 const MQTT_TOPIC_GAUGE_COMMAND_PRESSURE_PSI = 'gauges/gauge-alpha/set/pressure/psi'
-
+let gauges = []
 function loadLocalStorage() {
 	// aws region
 	const awsRegion = localStorage.getItem('awsRegion')
@@ -177,20 +176,40 @@ function updateConnectionStatus(isConnected) {
 }
 </script>
 <script>
-let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
-	this.origin = origin;			// Zero units is this many degrees from up.
-	this.factor = factor;			// Degrees per unit.
-	this.zero = zeroValue;			// Dial reads this at zero degrees.
-	this.setPosition = setPosition;
-	this.redraw = redraw;
-	this.needle = new Image;	// The needle image.
+function Gauge(id, canvas, type, background, value) {
+	this.id = id
+	this.type = type
+	this.background = background
+	this.value = value
+	console.log('creating Guage', id, canvas, type, background, value)
+	// default settings for pressure gauge
+	let needleSrc = 'resources/images/gauge-pressure-needle-400x400.png'
+	let origin = 0
+	let zeroValue = 120
+	let factor = 1.13
+	this.origin = origin		// Zero units is this many degrees from up.
+	this.factor = factor		// Degrees per unit.
+	this.zero = zeroValue		// Dial reads this at zero degrees.
+	// set background colour
+	$('#' + id).css('background-color', background)
+	// this.updateValue = updateValue		
+	this.setPosition = setPosition
+	this.redraw = redraw
+	this.needle = new Image 	// The needle image.
 	this.needleCenter = [14,110];
 	var c = document.getElementById(canvas);
 	this.ctx = c.getContext('2d');	// The drawing context.
 	this.canvasSize = [c.width, c.height];
 	this.needle.src = needleSrc;
+	this.updateValue = function(value) {
+		console.log('updating value', id, value)
+		this.value = value
+		this.setPosition(value)
+		// publishPressure(value)
+	}
 	function setPosition(position) {
 		// Convert to pointer degrees.
+		console.log('setPosition', position)
 		const offsetCenter = position-this.zero;
 		if (offsetCenter > 0) {
 			this.factor = 1.21
@@ -206,16 +225,17 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 		if (degrees < 0) degrees += 360;
 		if (degrees > 360) degrees -= 360;
 		this.redraw(degrees);
-	};
+	}
 	function redraw(degrees) {
-		var cx = this.ctx;
-		cx.save();
+		console.log('redraw', degrees)
+		let cx = this.ctx;
+		cx.save();	
 		cx.clearRect( 0, 0, this.canvasSize[0], this.canvasSize[1] );
-		// Center the dial on the canvas.
+		// center the dial on the canvas.
 		cx.translate( this.canvasSize[0]/2 , this.canvasSize[1]/2 );
-		// Center the needle on the canvas.
-		cx.rotate( 0.0174532925 * degrees );
-		cx.drawImage( this.needle, -this.needleCenter[0], -this.needleCenter[1] );
+		// center the needle on the canvas.
+		cx.rotate( 0.0174532925 * degrees )
+		cx.drawImage( this.needle, -this.needleCenter[0], -this.needleCenter[1] )
 		cx.restore();
 	}
 }
@@ -281,64 +301,40 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 	</div>
 </div>
 
-<div class="gauge-wrapper">
-<div class="gauge"><div class="gauge-pressure">
-<canvas id="pressure" height="400" width="400"></canvas>
-</div></div>
-
-<div class="gauge"><div class="gauge-pressure">
-	<canvas id="pressure" height="400" width="400"></canvas>
-	</div></div>
-
-	<div class="gauge"><div class="gauge-pressure">
-		<canvas id="pressure" height="400" width="400"></canvas>
-		</div></div>
-
-		<div class="gauge"><div class="gauge-pressure">
-			<canvas id="pressure" height="400" width="400"></canvas>
-			</div></div>
+<div id="oil-well" class="gauge-wrapper">
 </div>
-
-
 
 <script>
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlGauges = urlParams.get('g');
 const urlView = urlParams.get('view');
-let bp = 0;
+const backgroundColors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+
 if (urlGauges) {
-    console.log('loading gauges', urlGauges)
 	const gaugeList = urlGauges.split(',')
 	console.log('gaugeList', gaugeList)
-	const gauges = gaugeList.map( function(gauge) {
+	const loadingGaugesList = gaugeList.map( function(gauge) {
 		return {
 			"type": gauge.substring(0,2),
 			"value": Number(gauge.substring(2))
 		}
 	});
-	gauges.map(loadGauge)
-	console.log('gauges', gauges)
-    document.getElementById("bpInput").value = bp;
+	console.log('loading gauges', loadingGaugesList)
+	loadingGaugesList.map(loadGauge)
 }
+
+
 function loadGauge(gauge, index) {
-	console.log('loading gauge', index, gauge.type, gauge.value)
-
-
-}
-
-
-
-let pressureGauge = new gauge(
-    "pressure",
-    "resources/images/gauge-pressure-needle-400x400.png",
-    0,120,1.13);
-
-let initialBp = bp;
-function updatePressure(newBp) {
-    console.log('newBp', newBp)
-	pressureGauge.setPosition(newBp)
-	publishPressure(newBp)
+	const gaugeId = 'guage_' + index
+	const canvasId = 'canvas_' + index
+	const guageType = gauge.type
+	const guageValue = gauge.value
+	console.log('loading gauge', index, gaugeId, guageType, guageValue)
+	$('#oil-well').append('<div id=\''+gaugeId+'\' class=\'gauge\'></div>')
+	$('#' + gaugeId).append('<div class=\'gauge-pressure\'></div>')
+	$('#' + gaugeId + ' div').append('<canvas id=\''+canvasId+'\' height=\'400\' width=\'400\'></canvas>')
+	gauges[gaugeId] = new Gauge(gaugeId, canvasId, guageType, backgroundColors[index], guageValue)
 }
 function updateView(urlView) {
 	console.log('urlView', urlView)
@@ -348,8 +344,13 @@ function updateView(urlView) {
 }
 window.addEventListener('load', function () {
 	loadLocalStorage()
-	updatePressure(initialBp)
 	updateView(urlView)
+	// update gauges
+	for (var key in gauges) {
+		const myGauge = gauges[key]
+		console.log('update gauge', myGauge.value)
+		myGauge.updateValue(myGauge.value)
+	}
 })
 </script>
 </body>
