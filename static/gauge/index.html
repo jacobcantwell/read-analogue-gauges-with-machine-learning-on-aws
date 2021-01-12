@@ -11,13 +11,19 @@
 	width: 400px;
 	border: 1px solid black;
 }
+.gauge-wrapper {
+	padding: 10px;
+	background: #eeeeee;
+	float: left;
+	width: 100%
+}
 .gauge {
 	width: 400;
 	height: 400;
 	margin: 0;
 	border: 2px solid black;
 	float: left;
-	margin: 20 0 0 20;
+	margin: 10;
 	background-image: linear-gradient(to right, rgb(60, 68, 72, 0.2), rgba(20,20,20,0.1));
 	overflow: hidden;
 }
@@ -178,7 +184,7 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 	this.setPosition = setPosition;
 	this.redraw = redraw;
 	this.needle = new Image;	// The needle image.
-	this.needleCenter = [ 0, 0 ];
+	this.needleCenter = [14,110];
 	var c = document.getElementById(canvas);
 	this.ctx = c.getContext('2d');	// The drawing context.
 	this.canvasSize = [c.width, c.height];
@@ -275,36 +281,59 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 	</div>
 </div>
 
-<div class="gauge"><div class="gauge-pressure">
-<canvas id="pressure" height="400" width="400"></canvas>
-</div></div>
-<div class="gauge"><div class="gauge-pressure">
-<canvas id="pressure" height="400" width="400"></canvas>
-</div></div>
-<div class="gauge"><div class="gauge-pressure">
-<canvas id="pressure" height="400" width="400"></canvas>
-</div></div>
+<div class="gauge-wrapper">
 <div class="gauge"><div class="gauge-pressure">
 <canvas id="pressure" height="400" width="400"></canvas>
 </div></div>
 
+<div class="gauge"><div class="gauge-pressure">
+	<canvas id="pressure" height="400" width="400"></canvas>
+	</div></div>
+
+	<div class="gauge"><div class="gauge-pressure">
+		<canvas id="pressure" height="400" width="400"></canvas>
+		</div></div>
+
+		<div class="gauge"><div class="gauge-pressure">
+			<canvas id="pressure" height="400" width="400"></canvas>
+			</div></div>
+</div>
+
+
+
 <script>
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const urlBp = urlParams.get('g');
+const urlGauges = urlParams.get('g');
 const urlView = urlParams.get('view');
 let bp = 0;
-if (urlBp) {
-    bp = urlBp;
-    console.log('using URL bp', bp);
+if (urlGauges) {
+    console.log('loading gauges', urlGauges)
+	const gaugeList = urlGauges.split(',')
+	console.log('gaugeList', gaugeList)
+	const gauges = gaugeList.map( function(gauge) {
+		return {
+			"type": gauge.substring(0,2),
+			"value": Number(gauge.substring(2))
+		}
+	});
+	gauges.map(loadGauge)
+	console.log('gauges', gauges)
     document.getElementById("bpInput").value = bp;
 }
-console.log('setting bp', bp);
+function loadGauge(gauge, index) {
+	console.log('loading gauge', index, gauge.type, gauge.value)
+
+
+}
+
+
+
 let pressureGauge = new gauge(
     "pressure",
     "resources/images/gauge-pressure-needle-400x400.png",
     0,120,1.13);
-pressureGauge.needleCenter = [14,110];
+
 let initialBp = bp;
 function updatePressure(newBp) {
     console.log('newBp', newBp)
