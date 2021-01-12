@@ -51,12 +51,12 @@ async function generateImageAndSaveS3(page, bp, transformSuffix, clipX, clipY) {
     const s3Key = s3KeyPrefix + bp + transformSuffix + s3KeySuffix
     // console.log('capturing ' + transformSuffix + ' image', s3Key)
     const screenshotParams = {
-      // path: s3Key, // uncomment if only running locally - need to create a directory for each bp
+      path: s3Key, // uncomment if only running locally - need to create a directory for each bp
       clip: { x: clipX, y: clipY, width: 490, height: 490 }
     }
     // console.log('screenshotParams', screenshotParams)
     const screenshot = await page.screenshot(screenshotParams)
-    // save image to S3
+    /* save image to S3
     const s3Params = {
       Bucket: s3Bucket,
       Key: s3Key,
@@ -64,7 +64,7 @@ async function generateImageAndSaveS3(page, bp, transformSuffix, clipX, clipY) {
     };
     console.log('writing to s3: s3://' + s3Bucket + '/' + s3Key)
     await s3.putObject(s3Params).promise();
-
+    */
     // push to manifest file
     manifestLabels.push(getManifestLabelJson(s3Bucket, s3Key, bp))
     // push to results
@@ -86,38 +86,37 @@ exports.handler = async (event, context, callback) => {
       ignoreHTTPSErrors: true,
     })
     let page = await browser.newPage();
-    for (let i = 10; i < 231; i++) {
+    for (let i = 10; i < 16; i++) {
         let bp = zeroPad(i, 3);
         const url = URL_GAUGE_BUILDER_PREFIX + bp;
         console.log('loading url', url);
         await page.setViewport({
           width: 700,
           height: 780,
-          deviceScaleFactor: 0.8
+          deviceScaleFactor: 1
         });
         await page.goto(url);
         // original image
         await generateImageAndSaveS3(page, bp, '-original', 155, 98)
         // rotate image 45
-        await page.evaluate(() => { document.body.style.transform = 'rotate(45deg)'; });
-        await generateImageAndSaveS3(page, bp,'-rotated45', 200, 160)
+        // await page.evaluate(() => { document.body.style.transform = 'rotate(45deg)'; });
+        // await generateImageAndSaveS3(page, bp,'-rotated45', 200, 160)
         // rotate image 90
-        await page.evaluate(() => { document.body.style.transform = 'rotate(90deg)'; });
-        await generateImageAndSaveS3(page, bp, '-rotated90', 190, 235)
+        // await page.evaluate(() => { document.body.style.transform = 'rotate(90deg)'; });
+        // await generateImageAndSaveS3(page, bp, '-rotated90', 190, 235)
         // rotate image 135
-        await page.evaluate(() => { document.body.style.transform = 'rotate(135deg)'; });
-        await generateImageAndSaveS3(page, bp, '-rotated135', 135, 290)
+        // await page.evaluate(() => { document.body.style.transform = 'rotate(135deg)'; });
+        // await generateImageAndSaveS3(page, bp, '-rotated135', 135, 290)
         // rotate image 180
-        await page.evaluate(() => { document.body.style.transform = 'rotate(180deg)'; });
-        await generateImageAndSaveS3(page, bp,'-rotated180', 58, 270)
+        // await page.evaluate(() => { document.body.style.transform = 'rotate(180deg)'; });
+        // await generateImageAndSaveS3(page, bp,'-rotated180', 58, 270)
         // rotate image 270
-        await page.evaluate(() => { document.body.style.transform = 'rotate(270deg)'; });
-        await generateImageAndSaveS3(page, bp, '-rotated270', 23, 137)
+        // await page.evaluate(() => { document.body.style.transform = 'rotate(270deg)'; });
+        // await generateImageAndSaveS3(page, bp, '-rotated270', 23, 137)
     }
     // finished
     console.log('finished taking screenshots');
     // write manifest file
-    console.log('manifestLabels', manifestLabels)
     const manifestLabelsText = manifestLabels.join('\r\n')
     console.log('manifestLabelsText', manifestLabelsText)
     // save manifest file to S3
@@ -127,7 +126,7 @@ exports.handler = async (event, context, callback) => {
       Key: manifestS3Key,
       Body: manifestLabelsText
     };
-    console.log('writing manifest file to S3', s3Bucket, manifestS3Key)
+    console.log('writing manifest file to S3 - s3://' + s3Bucket + '/' + manifestS3Key)
     await s3.putObject(manifestS3Params).promise();
 } catch (error) {
     // return callback(error);

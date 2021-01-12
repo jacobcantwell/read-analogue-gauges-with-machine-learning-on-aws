@@ -6,11 +6,7 @@ weight: 1
 
 ## Read Analogue Gauges With Computer Vision on AWS
 
-![Analogue gauge](/images/pressure-gauge.jpg?width=20pc&classes=inline)
-![Analogue gauge](/images/pressure-gauge-bw.jpg?width=20pc&classes=inline)
-![Analogue gauge](/images/pressure-gauge-lines.jpg?width=20pc&classes=inline)
-
-[View a simulated pressure gauge](gauge/?bp=100)
+![Analogue gauge reading flow](images/three-gauges.png)
 
 ## Welcome
 
@@ -18,7 +14,11 @@ Analogue pointer-type dials are widely applied in many industries such as Oil & 
 
 In this workshop, you will get a hands-on introduction to Machine Learning.
 
-## Workshop summary
+## Analogue Gauge Builder
+
+Create your own virtual analogue gauges in the [Analogue Gauge Builder](gauge/?bp=100) website.
+
+## Agenda
 
 * Virtual - Send mock AWS analogue telemetry to AWS IoT
 * Virtual - Build real time analogue gauges Kibana

@@ -45,29 +45,24 @@ enableEmoji = true
 home = [ "HTML", "RSS", "JSON"]
 
 [[menu.shortcuts]] 
-name = "<i class='fas fa-graduation-cap'></i> Modernization Workshops"
-url = "https://awsworkshop.io"
+name = "Analogue Gauge Builder"
+url = "gauge/?bp=100"
 weight = 10
 
-[[menu.shortcuts]]
-name = "<i class='fas fa-tools'></i> AWS Builders Library"
-url = "https://aws.amazon.com/builders-library/"
+[[menu.shortcuts]] 
+name = "Modernization Workshops"
+url = "https://awsworkshop.io"
 weight = 20
-
-[[menu.shortcuts]]
-name = "<i class='far fa-lightbulb'></i> Modernization with AWS"
-url = "https://aws.amazon.com/blogs/modernizing-with-aws/"
-weight = 30
 
 [[menu.shortcuts]]
 name = "GitHub - Read Analogue Gauges With Computer Vision"
 url = "https://github.com/jacobcantwell/read-analogue-gauges-with-computer-vision"
-weight = 40
+weight = 30
 
 [[menu.shortcuts]]
 name = "Workshop notes"
 url = "notes.html"
-weight = 50
+weight = 31
 
 [markup]
   defaultMarkdownHandler = "blackfriday"
