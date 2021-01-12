@@ -181,7 +181,7 @@ function Gauge(id, canvas, type, background, value) {
 	this.type = type
 	this.background = background
 	this.value = value
-	console.log('creating Guage', id, canvas, type, background, value)
+	console.log('creating gauge', id, canvas, type, background, value)
 	// default settings for pressure gauge
 	let needleSrc = 'resources/images/gauge-pressure-needle-400x400.png'
 	let origin = 0
@@ -326,15 +326,15 @@ if (urlGauges) {
 
 
 function loadGauge(gauge, index) {
-	const gaugeId = 'guage_' + index
+	const gaugeId = 'gauge_' + index
 	const canvasId = 'canvas_' + index
-	const guageType = gauge.type
-	const guageValue = gauge.value
-	console.log('loading gauge', index, gaugeId, guageType, guageValue)
+	const gaugeType = gauge.type
+	const gaugeValue = gauge.value
+	console.log('loading gauge', index, gaugeId, gaugeType, gaugeValue)
 	$('#oil-well').append('<div id=\''+gaugeId+'\' class=\'gauge\'></div>')
 	$('#' + gaugeId).append('<div class=\'gauge-pressure\'></div>')
 	$('#' + gaugeId + ' div').append('<canvas id=\''+canvasId+'\' height=\'400\' width=\'400\'></canvas>')
-	gauges[gaugeId] = new Gauge(gaugeId, canvasId, guageType, backgroundColors[index], guageValue)
+	gauges[gaugeId] = new Gauge(gaugeId, canvasId, gaugeType, backgroundColors[index], gaugeValue)
 }
 function updateView(urlView) {
 	console.log('urlView', urlView)
