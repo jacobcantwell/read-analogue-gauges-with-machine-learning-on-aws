@@ -11,21 +11,28 @@
 	width: 400px;
 	border: 1px solid black;
 }
-.gauge-pressure {
-	width:800;
-	height:860;
-	background:url(resources/images/gauge-pressure.jpg);
-	background-repeat: no-repeat;
+.gauge {
+	width: 400;
+	height: 400;
 	margin: 0;
-	background-position-x: -100px;
-	background-position-y: -160px;
+	border: 2px solid black;
+	float: left;
+	margin: 20 0 0 20;
+	background-image: linear-gradient(to right, rgb(60, 68, 72, 0.2), rgba(20,20,20,0.1));
+	overflow: hidden;
+}
+.gauge-pressure {
+	background:url(resources/images/gauge-pressure-400x400.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	overflow: hidden;
 }
 </style>
-<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
-<link rel="manifest" href="icons/site.webmanifest" />
-<link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="apple-touch-icon" sizes="180x180" href="resources/icons/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="resources/icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="resources/icons/favicon-16x16.png" />
+<link rel="manifest" href="resources/icons/site.webmanifest" />
+<link rel="mask-icon" href="resources/icons/safari-pinned-tab.svg" color="#5bbad5" />
 <meta name="msapplication-TileColor" content="#da532c" />
 <meta name="theme-color" content="#ffffff" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
@@ -267,13 +274,24 @@ let gauge = function(canvas, needleSrc, origin, zeroValue, factor){
 		</button>
 	</div>
 </div>
-<div class="gauge-pressure">
-    <canvas id="pressure" height="680" width="796"></canvas>
-</div>
+
+<div class="gauge"><div class="gauge-pressure">
+<canvas id="pressure" height="400" width="400"></canvas>
+</div></div>
+<div class="gauge"><div class="gauge-pressure">
+<canvas id="pressure" height="400" width="400"></canvas>
+</div></div>
+<div class="gauge"><div class="gauge-pressure">
+<canvas id="pressure" height="400" width="400"></canvas>
+</div></div>
+<div class="gauge"><div class="gauge-pressure">
+<canvas id="pressure" height="400" width="400"></canvas>
+</div></div>
+
 <script>
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const urlBp = urlParams.get('bp');
+const urlBp = urlParams.get('g');
 const urlView = urlParams.get('view');
 let bp = 0;
 if (urlBp) {
@@ -284,9 +302,9 @@ if (urlBp) {
 console.log('setting bp', bp);
 let pressureGauge = new gauge(
     "pressure",
-    "resources/images/needle-pressure.png",
+    "resources/images/gauge-pressure-needle-400x400.png",
     0,120,1.13);
-pressureGauge.needleCenter = [26,200];
+pressureGauge.needleCenter = [14,110];
 let initialBp = bp;
 function updatePressure(newBp) {
     console.log('newBp', newBp)

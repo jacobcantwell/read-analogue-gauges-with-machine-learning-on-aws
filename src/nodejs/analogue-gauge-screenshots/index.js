@@ -86,7 +86,7 @@ exports.handler = async (event, context, callback) => {
       ignoreHTTPSErrors: true,
     })
     let page = await browser.newPage();
-    for (let i = 10; i < 16; i++) {
+    for (let i = 10; i < 11; i++) {
         let bp = zeroPad(i, 3);
         const url = URL_GAUGE_BUILDER_PREFIX + bp;
         console.log('loading url', url);
@@ -96,6 +96,9 @@ exports.handler = async (event, context, callback) => {
           deviceScaleFactor: 1
         });
         await page.goto(url);
+
+        const hrefElement = await page.$('a');
+
         // original image
         await generateImageAndSaveS3(page, bp, '-original', 155, 98)
         // rotate image 45
