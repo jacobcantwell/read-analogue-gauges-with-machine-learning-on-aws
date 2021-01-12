@@ -18,7 +18,7 @@ In this workshop, you will get a hands-on introduction to Machine Learning.
 
 Create your own virtual analogue gauges in the [Analogue Gauge Builder](gauge/?g=bp100,bp200,bp50,bp75,bp60,bp10) website.
 
-![Analogue gauge reading flow](images/three-gauges.png)
+![Analogue gauge reading flow](images/analogue-gauge-builder.png)
 
 ## Agenda
 
