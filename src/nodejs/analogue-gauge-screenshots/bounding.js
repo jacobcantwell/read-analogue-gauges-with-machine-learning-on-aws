@@ -70,10 +70,10 @@ async function getBoundingBoxManifestLabelJson(page, s3Key, bp) {
       console.log('label1', bp, i, (Number(bp)+i), labelNumber)
       annotationsArray.push({
         'class_id': i,
-        'top': gauge_box.y,
-        'left': gauge_box.x,
-        'width': Math.min(gauge_box.width, oil_well_box.width),
-        'height': Math.min(gauge_box.height, oil_well_box.height)
+        'top': gauge_box.y + 70,
+        'left': gauge_box.x + 70,
+        'width': Math.min(gauge_box.width -140, oil_well_box.width -140),
+        'height': Math.min(gauge_box.height -135, oil_well_box.height -135)
       })
       confidenceArray.push({ 'confidence': 1 })
       classmap[i] = label
@@ -99,7 +99,7 @@ async function getBoundingBoxManifestLabelJson(page, s3Key, bp) {
       }
     }
     manifestLabelJson = JSON.stringify(manifestLabelJson, null, null)
-    // console.log('manifestLabelJson', manifestLabelJson)
+    console.log('annotationsArray', annotationsArray)
     manifestLabels.push(manifestLabelJson)
     return manifestLabelJson
 }
@@ -135,7 +135,7 @@ async function scrapeImageAndSaveS3(page, s3Key, elementId, clipX = 0, clipY = 0
 async function generateSingleGaugeImage(page, bp, transformSuffix) {
   const s3Key = S3_IMAGE_FOLDER + '/single-gauges-bp' + bp + transformSuffix + '.jpg'
   console.log('generating', s3Key)
-  await scrapeImageAndSaveS3(page, s3Key, '#gauge_0', 20, 20)
+  await scrapeImageAndSaveS3(page, s3Key, '#gauge_0', 65, 65)
   // create manifest file
   await getManifestLabelJson(s3Key, bp)
 }
@@ -161,7 +161,7 @@ exports.handler = async (event, context, callback) => {
     })
     let page = await browser.newPage()
     let url
-    for (let i = 10; i < 14; i++) {
+    for (let i = 10; i < 11; i++) {
         let paddedBp = zeroPad(i, 3);
         let bp = zeroPad(i, 3);
         url = URL_GAUGE_BUILDER_PREFIX + 'bp'+ zeroPad(bp++, 3)

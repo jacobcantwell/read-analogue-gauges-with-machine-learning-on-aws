@@ -309,7 +309,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlGauges = urlParams.get('g');
 const urlView = urlParams.get('view');
-let backgroundColors = ['white','red', 'orange', 'yellow', 'green', 'blue', 'purple']
+let backgroundColors = ['white', 'red', 'orange', 'yellow', 'green', 'blue', 'purple']
 
 if (urlGauges) {
 	const gaugeList = urlGauges.split(',')
