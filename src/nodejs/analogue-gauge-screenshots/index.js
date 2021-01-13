@@ -97,25 +97,17 @@ exports.handler = async (event, context, callback) => {
         });
         await page.goto(url);
 
-        const hrefElement = await page.$('a');
-
         // original image
-        await generateImageAndSaveS3(page, bp, '-original', 155, 98)
-        // rotate image 45
-        // await page.evaluate(() => { document.body.style.transform = 'rotate(45deg)'; });
-        // await generateImageAndSaveS3(page, bp,'-rotated45', 200, 160)
-        // rotate image 90
-        // await page.evaluate(() => { document.body.style.transform = 'rotate(90deg)'; });
-        // await generateImageAndSaveS3(page, bp, '-rotated90', 190, 235)
-        // rotate image 135
-        // await page.evaluate(() => { document.body.style.transform = 'rotate(135deg)'; });
-        // await generateImageAndSaveS3(page, bp, '-rotated135', 135, 290)
-        // rotate image 180
-        // await page.evaluate(() => { document.body.style.transform = 'rotate(180deg)'; });
-        // await generateImageAndSaveS3(page, bp,'-rotated180', 58, 270)
-        // rotate image 270
-        // await page.evaluate(() => { document.body.style.transform = 'rotate(270deg)'; });
-        // await generateImageAndSaveS3(page, bp, '-rotated270', 23, 137)
+        await generateImageAndSaveS3(page, bp, '-original', 0, 0)
+
+        // rotate image 30
+        await page.evaluate(() => { document.body.style.transform = 'rotate(30deg)'; });
+        await generateImageAndSaveS3(page, bp,'-rotated30', 0, 0)
+
+        // rotate image 330
+        await page.evaluate(() => { document.body.style.transform = 'rotate(330deg)'; });
+        await generateImageAndSaveS3(page, bp, '-rotated330', 0, 0)
+
     }
     // finished
     console.log('finished taking screenshots');
