@@ -125,7 +125,7 @@ async function scrapeImageAndSaveS3(page, s3Key, elementId, clipX = 0, clipY = 0
     Key: s3Key,
     Body: screenshot
   };
-  // await s3.putObject(s3Params).promise()
+  await s3.putObject(s3Params).promise()
   const imageLocation = 's3://' + S3_TRAINING_BUCKET + '/' + s3Key
   console.log('imageLocation', imageLocation)
   imageList.push(imageLocation)
@@ -161,7 +161,7 @@ exports.handler = async (event, context, callback) => {
     })
     let page = await browser.newPage()
     let url
-    for (let i = 10; i < 11; i++) {
+    for (let i = 5; i < 234; i++) {
         let paddedBp = zeroPad(i, 3);
         let bp = zeroPad(i, 3);
         url = URL_GAUGE_BUILDER_PREFIX + 'bp'+ zeroPad(bp++, 3)
@@ -211,8 +211,7 @@ exports.handler = async (event, context, callback) => {
     };
     manifestFile = 's3://' + S3_TRAINING_BUCKET + '/' + manifestS3Key
     console.log('writing manifest file to', manifestFile)
-    // await s3.putObject(manifestS3Params).promise();
-
+    await s3.putObject(manifestS3Params).promise();
   } catch (error) {
     // return callback(error);
   } finally {
@@ -226,8 +225,8 @@ exports.handler = async (event, context, callback) => {
     'manifest': manifestFile
   }
   console.log('response', response)
-  return response
-  // return callback(null, imageList);
+  // return response
+  return callback(null, response);
 };
 
 exports.handler()

@@ -45,7 +45,7 @@ home = [ "HTML", "RSS", "JSON"]
 
 [[menu.shortcuts]] 
 name = "Analogue Gauge Builder"
-url = "gauge/?bp=100"
+url = "gauge/?g=bp30,bp70,bp110,bp150,bp190,230"
 weight = 10
 
 [[menu.shortcuts]] 
