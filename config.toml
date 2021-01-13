@@ -2,7 +2,7 @@ baseURL = "/"
 languageCode = "en-US"
 defaultContentLanguage = "en"
 
-title = "Read Analogue Gauges With Computer Vision"
+title = "Read Analogue Gauges With Machine Learning on AWS"
 theme = "hugo-theme-learn"
 metaDataFormat = "yaml"
 defaultContentLanguageInSubdir= "true"
@@ -13,7 +13,7 @@ enableEmoji = true
   # Prefix URL to edit current page. Will display an "Edit this page" button on top right hand corner of every page. 
   # Useful to give opportunity to people to create merge request for your doc.
   # See the config.toml file from this documentation site to have an example.
-  editURL = "https://github.com/jacobcantwell/read-analogue-gauges-with-computer-vision/blob/main/content/"
+  editURL = "https://github.com/jacobcantwell/read-analogue-gauges-with-machine-learning-on-aws/blob/main/content/"
   # Author of the site, will be used in meta information
   author = "Jacob Cantwell"
   # Description of the site, will be used in meta information
@@ -40,7 +40,6 @@ enableEmoji = true
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
   themeVariant = "mine"
 
-
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
@@ -50,13 +49,13 @@ url = "gauge/?bp=100"
 weight = 10
 
 [[menu.shortcuts]] 
-name = "Modernization Workshops"
-url = "https://awsworkshop.io"
+name = "AWS Workshops"
+url = "https://workshops.aws/"
 weight = 20
 
 [[menu.shortcuts]]
-name = "GitHub - Read Analogue Gauges With Computer Vision"
-url = "https://github.com/jacobcantwell/read-analogue-gauges-with-computer-vision"
+name = "GitHub - Read Analogue Gauges With Machine Learning on AWS"
+url = "https://github.com/jacobcantwell/read-analogue-gauges-with-machine-learning-on-aws"
 weight = 30
 
 [[menu.shortcuts]]
