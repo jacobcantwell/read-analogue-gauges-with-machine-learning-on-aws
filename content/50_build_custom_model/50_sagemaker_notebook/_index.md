@@ -1,7 +1,7 @@
 +++
 title = "x.1 SageMaker Notebooks"
 chapter = true
-weight = 10
+weight = 50
 +++
 
 ## x.1 SageMaker Notebooks
