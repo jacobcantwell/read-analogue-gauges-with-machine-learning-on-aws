@@ -1,10 +1,10 @@
 +++
-title = "x.1 SageMaker Notebooks"
+title = "x.1 SageMaker notebook"
 chapter = true
-weight = 50
+weight = 30
 +++
 
-## x.1 SageMaker Notebooks
+## x.1 SageMaker notebook
 
 In this section you will use a Jupyter Notebook to create and execute an Amazon SageMaker Object-Detection Training Job against a pre-labelled image dataset.
 

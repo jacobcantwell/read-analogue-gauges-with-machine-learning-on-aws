@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk')
 const rekognition = new AWS.Rekognition()
 
-const LAMBDA_VERSION = '003'
+const LAMBDA_VERSION = '005'
 
 exports.handler = async (event) => {
   console.log('running start model lambda', LAMBDA_VERSION)

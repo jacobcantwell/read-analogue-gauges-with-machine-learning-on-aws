@@ -8,6 +8,7 @@
 * [Training the Amazon SageMaker object detection model and running it on AWS IoT Greengrass – Part 1 of 3: Preparing training data](https://aws.amazon.com/blogs/iot/sagemaker-object-detection-greengrass-part-1-of-3/)
 * [Training the Amazon SageMaker object detection model and running it on AWS IoT Greengrass – Part 2 of 3: Training a custom object detection model](https://aws.amazon.com/blogs/iot/sagemaker-object-detection-greengrass-part-2-of-3/)
 * [Training the Amazon SageMaker object detection model and running it on AWS IoT Greengrass – Part 3 of 3: Deploying to the edge](https://aws.amazon.com/blogs/iot/sagemaker-object-detection-greengrass-part-3-of-3/)
+* [Creating a machine learning-powered REST API with Amazon API Gateway mapping templates and Amazon SageMaker](https://aws.amazon.com/blogs/machine-learning/creating-a-machine-learning-powered-rest-api-with-amazon-api-gateway-mapping-templates-and-amazon-sagemaker/)
 
 ## AWS Jupyter Notebooks
 

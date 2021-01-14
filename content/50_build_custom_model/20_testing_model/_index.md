@@ -1,10 +1,10 @@
 +++
-title = "x.1 Testing model"
+title = "x.1 Start the model"
 chapter = false
 weight = 20
 +++
 
-## Use your model
+## Start the model
 
 You can now start and stop the model, and analyze custom labels in new images.
 
