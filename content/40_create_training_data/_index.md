@@ -1,5 +1,5 @@
 +++
-title = "Part x: Create training data"
+title = "Part x: Training data"
 chapter = true
 weight = 40
 +++

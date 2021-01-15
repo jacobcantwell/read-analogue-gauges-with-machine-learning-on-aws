@@ -29,6 +29,8 @@
 * [GitHub Clock-Reader](https://github.com/shivaverma/Clock-Reader)
 * [Reading Clocks using Neural Nets](https://towardsdatascience.com/training-neural-net-to-read-clock-time-9473175171e3)
 * [Training the Amazon SageMaker object detection model and running it on AWS IoT Greengrass – Part 1 of 3: Preparing training data](https://aws.amazon.com/blogs/iot/sagemaker-object-detection-greengrass-part-1-of-3/)
+* [YouTube - YOLO: Real-Time Object Detection](https://www.youtube.com/watch?v=MPU2HistivI)
+* [YOLO: Real-Time Object Detection](https://pjreddie.com/darknet/yolo/)
 
 ## Computer Vision
 
