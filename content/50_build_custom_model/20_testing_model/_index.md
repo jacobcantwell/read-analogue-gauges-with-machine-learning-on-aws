@@ -21,3 +21,10 @@ You can now start and stop the model, and analyze custom labels in new images.
 * Wait until *Status* changes from *STARTING* to *RUNNING*
 
 ![Model status](20_testing_model/images/test-model-3.png "Model status")
+
+## Upload gauge test images to S3
+
+* In Amazon S3, open the *custom-labels-console-us-east-1-67a9361d65* prefixed S3 bucket.
+* Create a new folder *testing-images*.
+* Upload some new gauge images to the new *testing-images* folder.
+* Record a key name of the image.

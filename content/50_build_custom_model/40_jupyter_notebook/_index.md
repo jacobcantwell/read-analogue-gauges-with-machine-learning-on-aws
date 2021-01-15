@@ -41,9 +41,16 @@ Once the file is uploaded, click on the file name:
 
 ![Select analogue-gauge-augmented-manifest-training.ipynb](40_jupyter_notebook/images/jupyter-load-notebook-3.png "Select analogue-gauge-augmented-manifest-training.ipynb")
 
+You will be prompted to find a kernal matching Python 3.
+
+* Select the kernal *conda_amazonei_tensorflow_p36*.
+* Choose **Set Kernel**.
+
+![Set Kernel](40_jupyter_notebook/images/jupyter-load-notebook-5.png "Set Kernel")
+
 This will take you to the Jupyter Notebook execution environment, you will get a page similar to the below:
 
-![Jupyter Notebook execution environment](40_jupyter_notebook/images/jupyter-load-notebook-5.png "Jupyter Notebook execution environment")
+![Jupyter Notebook execution environment](40_jupyter_notebook/images/jupyter-load-notebook-6.png "Jupyter Notebook execution environment")
 
 ## Run the Jupyter notebook
 
@@ -72,7 +79,7 @@ The parameters that need updating are shown below. Click into the cell and modif
 
 ```python
 ## Updated below to your local lab team S3 bucket
-bucket_name = "deeplens-analogue-gauge-[YOUR TEAM NAME]" # Replace '[YOUR TEAM NAME]' with your lab teams bucket name.
+bucket_name = 'custom-labels-console-us-east-1-67a9361d65' # Replace '[YOUR TEAM NAME]' with your lab teams bucket name.
 
 # Create unique job name 
 job_name_prefix = 'analogue-gauge-[YOUR TEAM NAME]' # Replace '[YOUR TEAM NAME]' with your lab team name.

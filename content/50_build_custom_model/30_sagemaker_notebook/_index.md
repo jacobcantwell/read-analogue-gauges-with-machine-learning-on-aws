@@ -48,6 +48,12 @@ In the Amazon SageMaker console, select **Notebook instances** and click on the 
 The notebook instance will take a few minutes to initialise. Wait until the instance status moves from Pending to InService on the Amazon SageMaker Notebook Instance console.
 {{% /notice %}}
 
+### SageMaker IAM policy
+
+* Add the *AmazonRekognitionFullAccess* policy to the *AmazonSageMaker-ExecutionRole-20210111T151866* role.
+
+### Open Jupyter notebook
+
 Once the notebook status is *InService*, open the managed Jupyter notebook by clicking on **Open Jupyter**.
 
 ![Open Jupyter](30_sagemaker_notebook/images/sagemaker-create-notebook-6.png "Open Jupyter")
