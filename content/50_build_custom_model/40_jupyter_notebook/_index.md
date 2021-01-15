@@ -23,9 +23,9 @@ In the managed Jupyter notebook console, you can upload Jupyter notebook applica
 
 A prebuilt Jupyter notebook file has been built for this lab.
 
-**Right-click** this [Jupyter-Analogue-Gauge-Application](20_jupyter_notebook/jupyter/analogue-gauge-augmented-manifest-training.ipynb) link and select **‘Save Link As’** to download the file to local directory.
+**Right-click** this [Jupyter-Analogue-Gauge-Application](/jupyter/analogue-gauge-detection/analogue-gauge-augmented-manifest-training.ipynb) link and select **‘Save Link As’** to download the file to local directory.
 
-{{< button class="btn-primary" href="jupyter/analogue-gauge-augmented-manifest-training.ipynb" >}}Download prebuilt Jupyter-Analogue-Gauge-Application{{< /button >}}
+{{< button class="btn-primary" href="/jupyter/analogue-gauge-detection/analogue-gauge-augmented-manifest-training.ipynb" >}}Download prebuilt Jupyter-Analogue-Gauge-Application{{< /button >}}
 
 ### Upload the Jupyter notebook
 
