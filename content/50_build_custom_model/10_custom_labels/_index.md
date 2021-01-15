@@ -1,5 +1,5 @@
 +++
-title = "x.1 Amazon Rekognition Custom Labels"
+title = "Amazon Rekognition Custom Labels"
 chapter = false
 weight = 10
 +++

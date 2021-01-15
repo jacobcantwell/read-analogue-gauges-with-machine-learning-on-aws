@@ -1,10 +1,21 @@
 +++
-title = "x.2 Jupyter notebook"
+title = "Jupyter notebook"
 chapter = true
 weight =  40
 +++
 
-## x.2 Jupyter notebook
+## Jupyter notebooks
+
+[Jupyter](https://jupyter.org/) is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualization, machine learning.
+
+A Jupyter Notebook provides a python run-time environment and a workspace that together can be used to pull in machine learning datasets and perform any of the following functions:
+
+1. Clean or perform data pre-processing,
+2. Data transformation and augmentation,
+3. Predictive Inference and
+4. Data and Inference visualisation.
+
+## Jupyter console
 
 In the managed Jupyter notebook console, you can upload Jupyter notebook application files that contain descriptive steps as well as code to execute. You can also use the workspace to upload data for processing and formatting for a Sagemaker training job.
 
@@ -20,29 +31,29 @@ A prebuilt Jupyter notebook file has been built for this lab.
 
 In the Jupyter notebook select **Upload** and select the ‘analogue-gauge-augmented-manifest-training.ipynb’ file that you just saved locally.
 
-![Upload .pynb file](20_jupyter_notebook/images/jupyter-load-notebook-1.png "Upload .pynb file")
+![Upload .pynb file](40_jupyter_notebook/images/jupyter-load-notebook-1.png "Upload .pynb file")
 
 Then click the **Upload** button inline with the file you selected.
 
-![Click upload](20_jupyter_notebook/images/jupyter-load-notebook-2.png "Click upload")
+![Click upload](40_jupyter_notebook/images/jupyter-load-notebook-2.png "Click upload")
 
 Once the file is uploaded, click on the file name:
 
-![Select analogue-gauge-augmented-manifest-training.ipynb](20_jupyter_notebook/images/jupyter-load-notebook-3.png "Select analogue-gauge-augmented-manifest-training.ipynb")
+![Select analogue-gauge-augmented-manifest-training.ipynb](40_jupyter_notebook/images/jupyter-load-notebook-3.png "Select analogue-gauge-augmented-manifest-training.ipynb")
 
 This will take you to the Jupyter Notebook execution environment, you will get a page similar to the below:
 
-![Jupyter Notebook execution environment](20_jupyter_notebook/images/jupyter-load-notebook-5.png "Jupyter Notebook execution environment")
+![Jupyter Notebook execution environment](40_jupyter_notebook/images/jupyter-load-notebook-5.png "Jupyter Notebook execution environment")
 
 ## Run the Jupyter notebook
 
 The Jupyter notebook consists of a number of cells that contain either code or descriptive text elements. The code cells can be executed by selecting them and clicking the **Run** button.
 
-![Run the Jupyter notebook](20_jupyter_notebook/images/jupyter-run-notebook-1.png "Run the Jupyter notebook")
+![Run the Jupyter notebook](40_jupyter_notebook/images/jupyter-run-notebook-1.png "Run the Jupyter notebook")
 
 The notebook will start running and highlight each section as you progress. The first *Initialise project variables* section of notes is highlighted.
 
-![Initialise project variables section](20_jupyter_notebook/images/jupyter-run-notebook-2.png "Initialise project variables section")
+![Initialise project variables section](40_jupyter_notebook/images/jupyter-run-notebook-2.png "Initialise project variables section")
 
 ### Initialise project variables
 

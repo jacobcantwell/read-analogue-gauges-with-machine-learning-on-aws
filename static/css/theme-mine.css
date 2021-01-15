@@ -149,8 +149,12 @@ div.notices p:first-child:before {
     left: 10px;
 }
 
-#chapter p {
+#chapter p, #chapter h3 {
     text-align: left;
+}
+
+li {
+    font-size: 1.2rem;
 }
 
 img[src~="thumbnail"] {
