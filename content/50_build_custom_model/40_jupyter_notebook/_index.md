@@ -103,7 +103,7 @@ Always watch the cell indicator after executing. Don't move to the next step whi
 
 When the above described variables are set and the Initialise Project Variables code cell is selected then click the **Run** button.
 
-![Run Initialise project variables](20_jupyter_notebook/images/jupyter-run-notebook-3.png "Run Initialise project variables")
+![Run Initialise project variables](40_jupyter_notebook/images/jupyter-run-notebook-3.png "Run Initialise project variables")
 
 After a few second the cell will complete and you should see the status cell indicator will change to *In [ 1 ]*.
 
@@ -123,7 +123,7 @@ Continue reading and working your way through the Jupyter Notebook with the inst
 
 This section creates the AWS SDK objects for interacting with the AWS environment as well as read in the Execution Role. Click the **Run** button.
 
-![Run Setup](20_jupyter_notebook/images/jupyter-run-notebook-4.png "Run Setup")
+![Run Setup](40_jupyter_notebook/images/jupyter-run-notebook-4.png "Run Setup")
 
 Once executed you should see an output showing the Execution Role ARN.
 
@@ -137,8 +137,8 @@ This notes sections gives a detailed description of the augmented manifest file 
 
 ### Download the Augmented Manifest and Training Images
 
-![Run Setup](20_jupyter_notebook/images/gauge-calibration.jpg "Run Setup")
+![Run Setup](40_jupyter_notebook/images/gauge-calibration.jpg "Run Setup")
 
-![Run Setup](20_jupyter_notebook/images/gauge-dst2.jpg "Run Setup")
+![Run Setup](40_jupyter_notebook/images/gauge-dst2.jpg "Run Setup")
 
-![Run Setup](20_jupyter_notebook/images/gauge-lines.jpg "Run Setup")
+![Run Setup](40_jupyter_notebook/images/gauge-lines.jpg "Run Setup")
